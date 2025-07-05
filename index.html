@@ -5,221 +5,484 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kyuflorist - Toko Bunga Bucket Bali</title>
     
-    <!-- Tailwind CSS for styling -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="icon" type="image/png" href="kyuflorist logo.png">
 
     <style>
-        /* Custom styles to extend Tailwind */
+        :root {
+            /* Color Palette */
+            --soft-pink: #FFE6EF;
+            --pink-accent: #FF8FAB;
+            --pink-dark: #FB6F92;
+            
+            --ocean-blue: #B8E1FF;
+            --blue-accent: #5DA9E9;
+            --blue-dark: #3A7FC4;
+            
+            --tea-green: #D4F1E0;
+            --green-accent: #7BCBA4;
+            --green-dark: #5AA786;
+            
+            --text-dark: #2C3E50;
+            --text-medium: #5A6B7D;
+            --text-light: #8A9BAD;
+            
+            --bg-light: #FEFBF6;
+            --bg-offwhite: #FFF9F2;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FEFBF6; /* A very soft off-white */
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
+
         .font-display {
             font-family: 'Playfair Display', serif;
         }
-        /* Custom colors for the theme */
-        .bg-soft-pink { background-color: #FADADD; }
-        .bg-soft-blue { background-color: #BDE0FE; }
-        .bg-soft-green { background-color: #D4EEDD; }
-        .text-brand-dark { color: #2C3E50; }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 8px 0;
+            font-weight: 500;
+            color: var(--text-medium);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-dark);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--pink-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Button Styles */
         .btn-primary {
-            background-color: #FF8FAB; /* A stronger pink for CTA */
+            background: linear-gradient(135deg, var(--pink-accent) 0%, var(--pink-dark) 100%);
             color: white;
-            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(251, 111, 146, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 600;
         }
+
         .btn-primary:hover {
-            background-color: #FB6F92;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(251, 111, 146, 0.4);
         }
-        /* Style for the modal */
-        #product-modal {
-            transition: opacity 0.3s ease;
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--blue-accent) 0%, var(--blue-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(93, 169, 233, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 600;
         }
-        .modal-content {
-            transition: transform 0.3s ease;
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(93, 169, 233, 0.4);
         }
-        /* Loading spinner */
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--ocean-blue) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232C3E50' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        .info-card.clock::before {
+            background: linear-gradient(90deg, var(--green-accent), var(--blue-accent));
+        }
+
+        .info-card.truck::before {
+            background: linear-gradient(90deg, var(--blue-accent), var(--pink-accent));
+        }
+
+        .info-card.phone::before {
+            background: linear-gradient(90deg, var(--pink-accent), var(--green-accent));
+        }
+
+        /* Instagram Card */
+        .instagram-card {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(220, 39, 67, 0.2);
+        }
+
+        .instagram-card:hover {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 0 15px 40px rgba(220, 39, 67, 0.3);
+        }
+
+        /* Catalog Animation */
+        .catalog-button {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .catalog-button:hover {
+            transform: scale(1.05);
+        }
+
+        .catalog-button::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: rgba(255, 143, 171, 0.2);
+            z-index: -1;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.6; }
+            70% { transform: scale(1.1); opacity: 0.2; }
+            100% { transform: scale(0.8); opacity: 0.6; }
+        }
+
+        /* Petal Animation */
+        .petal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--pink-accent);
+            border-radius: 50% 50% 0 50%;
+            transform: rotate(45deg);
+            opacity: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, var(--tea-green) 0%, var(--ocean-blue) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-wave {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23FEFBF6' fill-opacity='1' d='M0,96L48,90C96,85,192,75,288,75C384,75,480,85,576,96C672,107,768,117,864,117.3C960,117,1056,107,1152,96C1248,85,1344,75,1392,69.3L1440,64L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        /* Loading Spinner */
         .loader {
             width: 48px;
             height: 48px;
             border: 5px solid #FFF;
-            border-bottom-color: #FF8FAB;
+            border-bottom-color: var(--pink-accent);
             border-radius: 50%;
             display: inline-block;
             box-sizing: border-box;
             animation: rotation 1s linear infinite;
         }
+
         @keyframes rotation {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        /* Mobile menu */
-        #mobile-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-        #mobile-menu.active {
-            max-height: 300px;
-        }
-        
-        /* Unique animation for catalog */
-        @keyframes flowerBloom {
-            0% { transform: scale(0.5); opacity: 0; }
-            30% { transform: scale(1.1); opacity: 1; }
-            50% { transform: scale(1); opacity: 1; }
-            70% { transform: rotate(3deg); }
-            100% { transform: rotate(0); }
-        }
-        
-        @keyframes petalFall {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(100px) rotate(360deg); opacity: 0; }
-        }
-        
-        .catalog-animation {
-            animation: flowerBloom 1.5s ease-out forwards;
-        }
-        
-        .petal {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #FF8FAB;
-            border-radius: 50% 50% 0 50%;
-            transform: rotate(45deg);
+
+        /* Modal Styles */
+        .modal {
+            transition: all 0.3s ease;
             opacity: 0;
-            z-index: -1;
+            visibility: hidden;
         }
-        
-        .instagram-card {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white;
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            transform: translateY(20px);
             transition: all 0.3s ease;
         }
-        
-        .instagram-card:hover {
-            transform: translateY(-5px) rotate(2deg);
-            box-shadow: 0 10px 25px rgba(220, 39, 67, 0.3);
+
+        .modal.active .modal-content {
+            transform: translateY(0);
         }
-        
-        .floating {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
-
     <!-- Header -->
-    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-40 shadow-sm">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-2">
-                <img src="kyuflorist logo.png" alt="Kyuflorist Logo" class="h-16 w-auto object-contain" style="max-width:200px;">
-            </a>
-            
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-gray-600">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-            
-            <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#hero" class="text-gray-600 hover:text-brand-dark transition">Home</a>
-                <a href="#products" class="text-gray-600 hover:text-brand-dark transition">Katalog</a>
-                <a href="#info" class="text-gray-600 hover:text-brand-dark transition">Info Toko</a>
-                <a href="#contact" class="text-gray-600 hover:text-brand-dark transition">Lokasi</a>
-            </nav>
-            <div class="flex items-center space-x-3">
-                <a href="https://www.tiktok.com/@bucket_kyuflorist?_t=ZS-8xjubtGwKsU&_r=1" target="_blank" class="inline-flex items-center justify-center rounded-full bg-white border border-gray-200 shadow hover:bg-gray-100 transition p-2" title="TikTok Kyuflorist">
-                    <img src="tik-tok.png" alt="TikTok" class="h-6 w-6 object-contain" style="display:block;">
+    <header class="sticky top-0 z-50" id="main-header">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-3">
+                    <img src="kyuflorist logo.png" alt="Kyuflorist Logo" class="h-14 w-auto">
+                    <span class="text-xl font-bold font-display hidden md:block">Kyuflorist</span>
                 </a>
-                <a href="https://wa.me/6285847499015?text=Halo%20Kyuflorist,%20saya%20mau%20pesan%20bunga%20urgent." target="_blank" class="btn-primary px-4 py-2 rounded-full font-semibold flex items-center space-x-2">
-                    <i data-lucide="zap" class="w-4 h-4"></i>
-                    <span>Order Cepat</span>
-                </a>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+                    <i data-lucide="menu" class="w-8 h-8"></i>
+                </button>
+                
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#hero" class="nav-link">Home</a>
+                    <a href="#products" class="nav-link">Katalog</a>
+                    <a href="#info" class="nav-link">Info Toko</a>
+                    <a href="#contact" class="nav-link">Lokasi</a>
+                </nav>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="https://www.tiktok.com/@bucket_kyuflorist" target="_blank" class="p-2 rounded-full bg-white shadow-sm hover:shadow-md transition">
+                        <img src="tik-tok.png" alt="TikTok" class="h-5 w-5">
+                    </a>
+                    <a href="https://wa.me/6285847499015" target="_blank" class="btn-primary px-5 py-2.5 rounded-full flex items-center space-x-2">
+                        <i data-lucide="zap" class="w-4 h-4"></i>
+                        <span>Order Cepat</span>
+                    </a>
+                </div>
             </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden bg-white shadow-lg">
-            <div class="container mx-auto px-6 py-4 flex flex-col space-y-3">
-                <a href="#hero" class="text-gray-600 hover:text-brand-dark transition py-2">Home</a>
-                <a href="#products" class="text-gray-600 hover:text-brand-dark transition py-2">Katalog</a>
-                <a href="#info" class="text-gray-600 hover:text-brand-dark transition py-2">Info Toko</a>
-                <a href="#contact" class="text-gray-600 hover:text-brand-dark transition py-2">Lokasi</a>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden bg-white mt-4 rounded-lg shadow-xl overflow-hidden transition-all duration-300 max-h-0">
+                <div class="px-6 py-4 flex flex-col space-y-4">
+                    <a href="#hero" class="nav-link py-2">Home</a>
+                    <a href="#products" class="nav-link py-2">Katalog</a>
+                    <a href="#info" class="nav-link py-2">Info Toko</a>
+                    <a href="#contact" class="nav-link py-2">Lokasi</a>
+                    <div class="pt-2 border-t border-gray-100 flex items-center justify-between">
+                        <a href="https://www.tiktok.com/@bucket_kyuflorist" target="_blank" class="p-2 rounded-full bg-gray-50">
+                            <img src="tik-tok.png" alt="TikTok" class="h-5 w-5">
+                        </a>
+                        <a href="https://wa.me/6285847499015" target="_blank" class="btn-primary px-5 py-2.5 rounded-full flex items-center space-x-2 text-sm">
+                            <i data-lucide="zap" class="w-4 h-4"></i>
+                            <span>Order Cepat</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <main>
         <!-- Hero Section -->
-        <section id="hero" class="relative text-center py-20 md:py-32 px-6 bg-soft-pink">
-            <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?q=80&w=1920&auto=format&fit=crop');"></div>
-            <div class="relative z-10">
-                <h1 class="text-4xl md:text-6xl font-display font-bold text-brand-dark">Bucket Bunga Cantik di Bali</h1>
-                <p class="mt-4 text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">Toko Bunga Sejak 2021. Temukan rangkaian bunga sempurna untuk setiap momen spesial Anda.</p>
-                <a href="#products" class="mt-8 inline-block btn-primary px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition">
-                    Lihat Katalog Produk
-                </a>
+        <section id="hero" class="hero-section py-24 md:py-32 px-6 relative">
+            <div class="hero-pattern"></div>
+            <div class="container mx-auto relative z-10">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h1 class="hero-title text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+                        <span class="block">Bucket Bunga Cantik</span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500">di Bali</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+                        Toko Bunga Sejak 2021. Temukan rangkaian bunga sempurna untuk setiap momen spesial Anda.
+                        Pengiriman cepat dan bunga segar langsung dari kebun kami.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="#products" class="btn-primary px-8 py-3.5 rounded-full text-lg font-semibold">
+                            Lihat Katalog
+                        </a>
+                        <a href="https://wa.me/6285847499015" target="_blank" class="btn-secondary px-8 py-3.5 rounded-full text-lg font-semibold flex items-center justify-center gap-2">
+                            <i data-lucide="message-circle"></i>
+                            Chat Sekarang
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Info Section -->
-        <section id="info" class="py-16 bg-white">
+        <section id="info" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-3 gap-8 text-center">
-                    <div class="bg-soft-green p-6 rounded-xl shadow-md">
-                        <i data-lucide="clock" class="w-12 h-12 mx-auto text-green-700"></i>
-                        <h3 class="font-bold text-xl mt-4 text-brand-dark">Jam Operasional</h3>
-                        <p class="text-gray-600 mt-2">Setiap Hari: 09.00 - 20.00 WITA</p>
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Kenapa Memilih Kyuflorist?</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        Kami memberikan pelayanan terbaik dengan bunga segar pilihan untuk membuat momen spesial Anda semakin berkesan.
+                    </p>
+                </div>
+                
+                <div class="info-grid grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="info-card clock p-8 text-center">
+                        <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-green-50 flex items-center justify-center">
+                            <i data-lucide="clock" class="w-8 h-8 text-green-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Jam Operasional</h3>
+                        <p class="text-gray-600">
+                            Setiap Hari: 09.00 - 20.00 WITA<br>
+                            Siap melayani pesanan Anda kapan saja
+                        </p>
                     </div>
-                    <div class="bg-soft-blue p-6 rounded-xl shadow-md">
-                        <i data-lucide="truck" class="w-12 h-12 mx-auto text-blue-700"></i>
-                        <h3 class="font-bold text-xl mt-4 text-brand-dark">Pengiriman Tersedia</h3>
-                        <p class="text-gray-600 mt-2">Pengiriman dilakukan via GoSend.</p>
+                    
+                    <div class="info-card truck p-8 text-center">
+                        <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-50 flex items-center justify-center">
+                            <i data-lucide="truck" class="w-8 h-8 text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Pengiriman Tersedia</h3>
+                        <p class="text-gray-600">
+                            Pengiriman dilakukan via GoSend<br>
+                            Area Denpasar dan sekitarnya
+                        </p>
                     </div>
-                    <div class="bg-soft-pink p-6 rounded-xl shadow-md">
-                        <i data-lucide="phone-call" class="w-12 h-12 mx-auto text-pink-700"></i>
-                        <h3 class="font-bold text-xl mt-4 text-brand-dark">Urgent Order</h3>
-                        <p class="text-gray-600 mt-2">Hubungi 0858-4749-9015 untuk pesanan mendadak.</p>
+                    
+                    <div class="info-card phone p-8 text-center">
+                        <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-pink-50 flex items-center justify-center">
+                            <i data-lucide="phone-call" class="w-8 h-8 text-pink-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Urgent Order</h3>
+                        <p class="text-gray-600">
+                            Hubungi 0858-4749-9015<br>
+                            Untuk pesanan mendadak atau konsultasi
+                        </p>
                     </div>
                 </div>
                 
                 <!-- Instagram Card -->
-                <div class="mt-16 max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden instagram-card">
-                    <div class="p-8 flex flex-col md:flex-row items-center gap-6">
-                        <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center">
-                            <i data-lucide="instagram" class="w-16 h-16 text-pink-500"></i>
-                        </div>
-                        <div class="text-center md:text-left">
-                            <h3 class="text-2xl font-bold font-display">Ikuti Kami di Instagram</h3>
-                            <p class="mt-2 text-white/90">Lihat karya terbaru dan promosi spesial dari Kyuflorist</p>
-                            <a href="https://www.instagram.com/kyuflorist/" target="_blank" class="mt-4 inline-block bg-white text-pink-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition">
-                                @kyuflorist
-                            </a>
+                <div class="mt-20 max-w-4xl mx-auto">
+                    <div class="instagram-card rounded-2xl overflow-hidden">
+                        <div class="p-8 md:p-10 flex flex-col md:flex-row items-center gap-8">
+                            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="instagram" class="w-12 h-12 text-pink-500"></i>
+                            </div>
+                            <div class="text-center md:text-left">
+                                <h3 class="text-2xl md:text-3xl font-display font-bold mb-2">Ikuti Kami di Instagram</h3>
+                                <p class="text-white/90 mb-6 max-w-md">
+                                    Lihat karya terbaru, promosi spesial, dan inspirasi rangkaian bunga dari Kyuflorist.
+                                    Update setiap hari dengan koleksi bunga segar kami.
+                                </p>
+                                <a href="https://www.instagram.com/kyuflorist/" target="_blank" class="inline-block bg-white text-pink-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition transform hover:-translate-y-1">
+                                    @kyuflorist
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -227,19 +490,25 @@
         </section>
 
         <!-- Products Section -->
-        <section id="products" class="py-16 relative overflow-hidden">
+        <section id="products" class="py-20 md:py-28 relative overflow-hidden bg-gradient-to-b from-white to-gray-50">
             <div class="absolute inset-0 z-0" id="petal-container"></div>
             <div class="container mx-auto px-6 relative z-10">
-                <h2 class="text-3xl md:text-4xl font-display font-bold text-center text-brand-dark">Katalog Produk Kami</h2>
-                <p class="text-center text-gray-600 mt-2 mb-10">Klik tombol di bawah untuk melihat katalog lengkap kami</p>
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Katalog Produk Kami</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        Koleksi bunga bucket terbaik kami, siap membuat hari spesial Anda lebih berwarna.
+                        Klik tombol di bawah untuk melihat katalog lengkap.
+                    </p>
+                </div>
 
-                <div class="flex justify-center mt-16">
-                    <div id="catalog-button" class="catalog-animation relative cursor-pointer group">
-                        <div class="relative w-64 h-64 rounded-full bg-gradient-to-br from-pink-200 to-pink-400 flex items-center justify-center shadow-xl group-hover:shadow-2xl transition-all duration-300">
+                <div class="flex justify-center">
+                    <div id="catalog-button" class="catalog-button cursor-pointer">
+                        <div class="relative w-64 h-64 rounded-full bg-gradient-to-br from-pink-200 to-pink-400 flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300">
                             <div class="absolute inset-0 rounded-full bg-white/20 backdrop-blur-sm"></div>
-                            <div class="relative">
-                                <i data-lucide="folder-open" class="w-16 h-16 text-white"></i>
+                            <div class="relative text-center">
+                                <i data-lucide="folder-open" class="w-16 h-16 text-white mx-auto"></i>
                                 <h3 class="mt-4 text-xl font-bold text-white">Buka Katalog</h3>
+                                <p class="text-white/90 text-sm mt-1">Google Drive</p>
                             </div>
                             
                             <!-- Floating petals -->
@@ -249,41 +518,69 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Product Grid (Sample) -->
+                <div class="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 hidden" id="product-grid">
+                    <!-- Products would be loaded here via JavaScript -->
+                </div>
             </div>
         </section>
 
         <!-- Contact & Location Section -->
-        <section id="contact" class="py-16 bg-soft-green">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-display font-bold text-brand-dark">Kunjungi Kami</h2>
-                <p class="text-gray-700 mt-2">Atau hubungi kami untuk pemesanan dan informasi lebih lanjut.</p>
-                <div class="mt-8 max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-8">
-                    <div class="w-full md:w-1/2 text-left">
-                        <h3 class="font-bold text-2xl text-brand-dark">📍 Kyuflorist</h3>
-                        <p class="mt-2 text-gray-600">Jl Bulu Indah No 10, Denpasar, Bali, Indonesia 80119</p>
-                        <a href="https://wa.me/6285847499015?text=Halo%20Kyuflorist,%20saya%20mau%20bertanya%20tentang%20produk." target="_blank" class="mt-6 inline-block bg-green-500 instagram-card px-6 py-3 rounded-full font-semibold hover:bg-green-600 transition flex items-center justify-center space-x-2" style="background:linear-gradient(45deg,#43e97b 0%,#38f9d7 100%);color:white;">
-                            <i data-lucide="message-circle" class="w-5 h-5"></i>
-                            <span>Chat via WhatsApp</span>
-                        </a>
-                        <a href="https://www.instagram.com/kyuflorist/" target="_blank" class="mt-4 inline-block instagram-card px-6 py-3 rounded-full font-semibold transition flex items-center justify-center space-x-2">
-                            <i data-lucide="instagram" class="w-5 h-5"></i>
-                            <span>Follow Instagram</span>
-                        </a>
-                        <a href="https://maps.app.goo.gl/DcHYoi6f1o79T3c9A" target="_blank" class="mt-4 inline-block instagram-card px-6 py-3 rounded-full font-semibold transition flex items-center justify-center space-x-2" style="background:linear-gradient(45deg,#2193b0 0%,#6dd5ed 100%);color:white;">
-                            <i data-lucide="map-pin" class="w-5 h-5"></i>
-                            <span>Lihat di Google Maps</span>
-                        </a>
-                    </div>
-                    <div class="w-full md:w-1/2 h-64 rounded-lg overflow-hidden">
-                        <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.498818882046!2d115.1982186748981!3d-8.643340191402246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23f7a09855555%3A0x8c7855f52b6d1b7b!2sJl.%20Bulu%20Indah%20No.10%2C%20Pemecutan%20Kaja%2C%20Kec.%20Denpasar%20Utara%2C%20Kota%20Denpasar%2C%20Bali%2080111!5e0!3m2!1sid!2sid!4v1717920000000!5m2!1sid!2sid" 
-        width="100%" 
-        height="100%" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
+        <section id="contact" class="py-20 md:py-28 bg-gradient-to-b from-gray-50 to-tea-green">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Kunjungi Kami</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        Datang langsung ke toko kami atau hubungi untuk pemesanan dan informasi lebih lanjut.
+                    </p>
+                </div>
+                
+                <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="flex flex-col md:flex-row">
+                        <div class="w-full md:w-1/2 p-8 md:p-10">
+                            <h3 class="text-2xl font-display font-bold mb-6">📍 Kyuflorist</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <i data-lucide="map-pin" class="w-5 h-5 text-blue-500 mt-1 flex-shrink-0"></i>
+                                    <p>Jl Bulu Indah No 10, Denpasar, Bali, Indonesia 80119</p>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <i data-lucide="clock" class="w-5 h-5 text-green-500 mt-1 flex-shrink-0"></i>
+                                    <p>Buka setiap hari 09.00 - 20.00 WITA</p>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <i data-lucide="phone" class="w-5 h-5 text-pink-500 mt-1 flex-shrink-0"></i>
+                                    <p>0858-4749-9015 (WhatsApp/Call)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-8 space-y-4">
+                                <a href="https://wa.me/6285847499015" target="_blank" class="btn-secondary w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
+                                    <i data-lucide="message-circle"></i>
+                                    Chat via WhatsApp
+                                </a>
+                                <a href="https://www.instagram.com/kyuflorist/" target="_blank" class="instagram-card w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
+                                    <i data-lucide="instagram"></i>
+                                    Follow Instagram
+                                </a>
+                                <a href="https://maps.app.goo.gl/DcHYoi6f1o79T3c9A" target="_blank" class="bg-gradient-to-r from-blue-400 to-blue-600 text-white w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
+                                    <i data-lucide="map-pin"></i>
+                                    Lihat di Google Maps
+                                </a>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/2 h-80 md:h-auto">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.498818882046!2d115.1982186748981!3d-8.643340191402246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23f7a09855555%3A0x8c7855f52b6d1b7b!2sJl.%20Bulu%20Indah%20No.10%2C%20Pemecutan%20Kaja%2C%20Kec.%20Denpasar%20Utara%2C%20Kota%20Denpasar%2C%20Bali%2080111!5e0!3m2!1sid!2sid!4v1717920000000!5m2!1sid!2sid" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -291,37 +588,134 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-brand-dark text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <div class="flex justify-center space-x-6 mb-4">
-                <a href="https://www.instagram.com/kyuflorist/" target="_blank" class="text-gray-300 hover:text-white transition">
-                    <i data-lucide="instagram" class="w-6 h-6"></i>
-                </a>
-                <a href="https://wa.me/6285847499015" target="_blank" class="text-gray-300 hover:text-white transition">
-                    <i data-lucide="message-circle" class="w-6 h-6"></i>
-                </a>
+    <footer class="pt-24 pb-12 relative">
+        <div class="footer-wave"></div>
+        <div class="footer-content container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between gap-10 mb-12">
+                <div class="md:w-1/3">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="kyuflorist logo.png" alt="Kyuflorist Logo" class="h-12 w-auto">
+                        <span class="text-xl font-display font-bold">Kyuflorist</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Toko bunga bucket terbaik di Bali sejak 2021, menyediakan rangkaian bunga segar untuk setiap momen spesial Anda.
+                    </p>
+                    <div class="flex gap-4 mt-6">
+                        <a href="https://www.instagram.com/kyuflorist/" target="_blank" class="bg-white/20 p-2.5 rounded-full hover:bg-white/30 transition">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://wa.me/6285847499015" target="_blank" class="bg-white/20 p-2.5 rounded-full hover:bg-white/30 transition">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@bucket_kyuflorist" target="_blank" class="bg-white/20 p-2.5 rounded-full hover:bg-white/30 transition">
+                            <img src="tik-tok.png" alt="TikTok" class="w-5 h-5">
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/3">
+                    <h4 class="font-display font-bold text-lg mb-6">Tautan Cepat</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#hero" class="footer-link inline-block">Home</a></li>
+                        <li><a href="#products" class="footer-link inline-block">Katalog Produk</a></li>
+                        <li><a href="#info" class="footer-link inline-block">Info Toko</a></li>
+                        <li><a href="#contact" class="footer-link inline-block">Kontak & Lokasi</a></li>
+                        <li><a href="https://drive.google.com/drive/folders/1hEIvZRPXCxnrgsUY-rz-JyoYmRroHSYs" target="_blank" class="footer-link inline-block">Katalog Lengkap</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:w-1/3">
+                    <h4 class="font-display font-bold text-lg mb-6">Kontak Kami</h4>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 mt-1 flex-shrink-0"></i>
+                            <p>Jl Bulu Indah No 10, Denpasar, Bali, Indonesia 80119</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-5 h-5"></i>
+                            <p>0858-4749-9015</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            <p>kyuflorist@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p>&copy; <span id="year"></span> Kyuflorist. All Rights Reserved.</p>
-            <p class="text-sm text-gray-400 mt-2">Dibuat dengan ❤️ oleh mitsuha-dev</p>
+            
+            <div class="pt-8 border-t border-white/20 text-center">
+                <p>&copy; <span id="year"></span> Kyuflorist. All Rights Reserved.</p>
+                <p class="text-sm mt-2 opacity-80">Dibuat dengan ❤️ oleh mitsuha-dev</p>
+            </div>
         </div>
     </footer>
 
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div class="modal-content bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <button id="close-modal" class="ml-auto block text-gray-500 hover:text-gray-700">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                
+                <div class="grid md:grid-cols-2 gap-8 mt-4">
+                    <div class="bg-gray-100 rounded-xl h-64 md:h-80 flex items-center justify-center">
+                        <img id="modal-image" src="" alt="Product" class="max-h-full max-w-full object-contain">
+                    </div>
+                    
+                    <div>
+                        <h3 id="modal-title" class="text-2xl font-display font-bold"></h3>
+                        <div id="modal-price" class="text-xl font-bold text-pink-500 my-4"></div>
+                        <p id="modal-description" class="text-gray-600 mb-6"></p>
+                        
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="flex items-center gap-2 text-gray-600">
+                                <i data-lucide="package" class="w-5 h-5"></i>
+                                <span id="modal-stock"></span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-600">
+                                <i data-lucide="star" class="w-5 h-5 text-yellow-400"></i>
+                                <span id="modal-rating"></span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://wa.me/6285847499015" target="_blank" class="btn-primary w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
+                            <i data-lucide="shopping-cart"></i>
+                            Pesan Sekarang
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize icons
+            lucide.createIcons();
+            
+            // Set current year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
             // --- DOM ELEMENTS ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const catalogButton = document.getElementById('catalog-button');
             const petalContainer = document.getElementById('petal-container');
+            const productGrid = document.getElementById('product-grid');
+            const productModal = document.getElementById('product-modal');
+            const closeModal = document.getElementById('close-modal');
             
             // --- FUNCTIONS ---
             
             // Toggle mobile menu
             function toggleMobileMenu() {
-                mobileMenu.classList.toggle('active');
+                mobileMenu.classList.toggle('max-h-0');
+                mobileMenu.classList.toggle('max-h-[500px]');
+                mobileMenu.classList.toggle('py-4');
                 
                 const menuIcon = mobileMenuButton.querySelector('i');
-                if (mobileMenu.classList.contains('active')) {
+                if (mobileMenu.classList.contains('max-h-[500px]')) {
                     menuIcon.setAttribute('data-lucide', 'x');
                 } else {
                     menuIcon.setAttribute('data-lucide', 'menu');
@@ -331,55 +725,63 @@
             
             // Create petal animation
             function createPetalAnimation() {
-                // Create petals
-                for (let i = 0; i < 15; i++) {
-                    const petal = document.createElement('div');
-                    petal.classList.add('petal');
-                    
-                    // Random position
-                    petal.style.left = `${Math.random() * 100}%`;
-                    petal.style.top = `${Math.random() * 100}%`;
-                    
-                    // Random size
-                    const size = 8 + Math.random() * 12;
-                    petal.style.width = `${size}px`;
-                    petal.style.height = `${size}px`;
-                    
-                    // Random color
-                    const colors = ['#FF8FAB', '#FB6F92', '#FFB3C6', '#FFDDE1'];
-                    petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    
-                    // Random animation delay and duration
-                    const delay = Math.random() * 5;
-                    const duration = 3 + Math.random() * 4;
-                    petal.style.animation = `petalFall ${duration}s linear ${delay}s infinite`;
-                    
-                    petalContainer.appendChild(petal);
+                for (let i = 0; i < 20; i++) {
+                    createPetal();
                 }
+                
+                // Add new petals periodically
+                setInterval(() => {
+                    if (document.hasFocus()) {
+                        createPetal();
+                    }
+                }, 3000);
+            }
+            
+            function createPetal() {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                
+                // Random position
+                petal.style.left = `${Math.random() * 100}%`;
+                petal.style.top = `${-20 - Math.random() * 10}%`;
+                
+                // Random size
+                const size = 8 + Math.random() * 20;
+                petal.style.width = `${size}px`;
+                petal.style.height = `${size}px`;
+                
+                // Random color
+                const colors = ['#FF8FAB', '#FB6F92', '#FFB3C6', '#FFDDE1', '#B8E1FF'];
+                petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Random animation
+                const duration = 8 + Math.random() * 12;
+                const delay = Math.random() * 5;
+                petal.style.animation = `petalFall ${duration}s linear ${delay}s forwards`;
+                
+                petalContainer.appendChild(petal);
+                
+                // Remove petal after animation completes
+                setTimeout(() => {
+                    petal.remove();
+                }, (duration + delay) * 1000);
             }
             
             // Trigger catalog animation
             function triggerCatalogAnimation() {
-                // Reset animation
-                catalogButton.classList.remove('catalog-animation');
-                void catalogButton.offsetWidth; // Trigger reflow
-                
-                // Add animation class
-                catalogButton.classList.add('catalog-animation');
-                
-                // Create extra petals
+                // Create explosion of petals
                 for (let i = 0; i < 30; i++) {
                     const petal = document.createElement('div');
                     petal.classList.add('petal');
                     
                     // Position around the button
                     const angle = Math.random() * Math.PI * 2;
-                    const radius = 100;
-                    petal.style.left = `calc(50% + ${Math.cos(angle) * radius}px)`;
-                    petal.style.top = `calc(50% + ${Math.sin(angle) * radius}px)`;
+                    const radius = 100 + Math.random() * 50;
+                    petal.style.left = `calc(50% + ${Math.cos(angle) * radius}px`;
+                    petal.style.top = `calc(50% + ${Math.sin(angle) * radius}px`;
                     
                     // Random size
-                    const size = 10 + Math.random() * 15;
+                    const size = 10 + Math.random() * 20;
                     petal.style.width = `${size}px`;
                     petal.style.height = `${size}px`;
                     
@@ -400,30 +802,158 @@
                 
                 // Open catalog after animation
                 setTimeout(() => {
-                    window.open('https://drive.google.com/drive/folders/17jK2h3KWjxSmNTsJk6fHWF5oJ5yyAsl5', '_blank');
-                }, 1000);
+                    window.open('https://drive.google.com/drive/folders/1hEIvZRPXCxnrgsUY-rz-JyoYmRroHSYs', '_blank');
+                }, 800);
             }
-
+            
+            // Load sample products (in a real app, this would be an API call)
+            function loadSampleProducts() {
+                const products = [
+                    {
+                        id: 1,
+                        title: "Bucket Bunga Mawar Merah",
+                        price: "Rp 250.000",
+                        description: "Bucket bunga mawar merah segar dengan tambahan baby's breath dan daun eucalyptus. Cocok untuk anniversary atau birthday gift.",
+                        image: "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                        stock: "Tersedia",
+                        rating: "4.9 (128 reviews)"
+                    },
+                    {
+                        id: 2,
+                        title: "Bucket Bunga Campur",
+                        price: "Rp 300.000",
+                        description: "Bucket bunga campur dengan berbagai jenis bunga segar termasuk mawar, lili, dan tulip. Dikemas dengan elegant wrapping.",
+                        image: "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                        stock: "Tersedia",
+                        rating: "4.8 (95 reviews)"
+                    },
+                    {
+                        id: 3,
+                        title: "Bucket Bunga Baby Pink",
+                        price: "Rp 275.000",
+                        description: "Bucket bunga dengan dominan warna pink soft, kombinasi mawar pink dan putih dengan aksen gypsophila.",
+                        image: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                        stock: "Tersedia",
+                        rating: "4.7 (82 reviews)"
+                    }
+                ];
+                
+                let html = '';
+                products.forEach(product => {
+                    html += `
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg">
+                            <div class="h-48 bg-gray-100 flex items-center justify-center p-4">
+                                <img src="${product.image}" alt="${product.title}" class="h-full w-full object-cover">
+                            </div>
+                            <div class="p-6">
+                                <h3 class="font-bold text-lg mb-2">${product.title}</h3>
+                                <div class="text-pink-500 font-bold mb-3">${product.price}</div>
+                                <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                    <span class="flex items-center">
+                                        <i data-lucide="package" class="w-4 h-4 mr-1"></i>
+                                        ${product.stock}
+                                    </span>
+                                    <span class="flex items-center">
+                                        <i data-lucide="star" class="w-4 h-4 text-yellow-400 mr-1"></i>
+                                        ${product.rating}
+                                    </span>
+                                </div>
+                                <button class="view-product-btn w-full btn-primary py-2 rounded-lg text-sm font-medium" 
+                                    data-id="${product.id}"
+                                    data-title="${product.title}"
+                                    data-price="${product.price}"
+                                    data-description="${product.description}"
+                                    data-image="${product.image}"
+                                    data-stock="${product.stock}"
+                                    data-rating="${product.rating}">
+                                    Lihat Detail
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                productGrid.innerHTML = html;
+                productGrid.classList.remove('hidden');
+                lucide.createIcons();
+                
+                // Add event listeners to product buttons
+                document.querySelectorAll('.view-product-btn').forEach(btn => {
+                    btn.addEventListener('click', openProductModal);
+                });
+            }
+            
+            // Open product modal
+            function openProductModal(e) {
+                const btn = e.currentTarget;
+                document.getElementById('modal-title').textContent = btn.dataset.title;
+                document.getElementById('modal-price').textContent = btn.dataset.price;
+                document.getElementById('modal-description').textContent = btn.dataset.description;
+                document.getElementById('modal-image').src = btn.dataset.image;
+                document.getElementById('modal-image').alt = btn.dataset.title;
+                document.getElementById('modal-stock').textContent = btn.dataset.stock;
+                document.getElementById('modal-rating').textContent = btn.dataset.rating;
+                
+                productModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Close product modal
+            function closeProductModal() {
+                productModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            // Header scroll effect
+            function handleScroll() {
+                const header = document.getElementById('main-header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            
             // --- EVENT LISTENERS ---
             mobileMenuButton.addEventListener('click', toggleMobileMenu);
+            catalogButton.addEventListener('click', triggerCatalogAnimation);
+            closeModal.addEventListener('click', closeProductModal);
+            productModal.addEventListener('click', (e) => {
+                if (e.target === productModal) {
+                    closeProductModal();
+                }
+            });
+            window.addEventListener('scroll', handleScroll);
             
             // Close mobile menu when clicking on links
             mobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
-                    mobileMenu.classList.remove('active');
+                    mobileMenu.classList.add('max-h-0');
+                    mobileMenu.classList.remove('max-h-[500px]', 'py-4');
                     const menuIcon = mobileMenuButton.querySelector('i');
                     menuIcon.setAttribute('data-lucide', 'menu');
                     lucide.createIcons();
                 });
             });
             
-            // Catalog button click
-            catalogButton.addEventListener('click', triggerCatalogAnimation);
-
             // --- INITIALIZATION ---
-            lucide.createIcons(); // Initialize icons
-            document.getElementById('year').textContent = new Date().getFullYear(); // Set current year in footer
-            createPetalAnimation(); // Create background petal animation
+            createPetalAnimation();
+            handleScroll(); // Initialize header state
+            // loadSampleProducts(); // Uncomment to show sample products
+            
+            // Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fadeIn');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
         });
     </script>
 </body>
