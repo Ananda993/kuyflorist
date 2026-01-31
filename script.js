@@ -120,10 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 40, name: "Sewa standing foto", description: "chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-39.jpg", category: "regular" },
 
         // Valentine Products
-        { id: 41, name: "Valentine Day", description: "", price: "Chat admin untuk harga", image: "foto-produk/FT-01.jpeg", category: "valentine" },
-        { id: 42, name: "Add On", description: "", price: "Chat admin untuk harga", image: "foto-produk/FT-02.jpeg", category: "valentine" },
+        { id: 41, name: "Valentine Day", description: "", price: "", image: "foto-produk/FT-01.jpeg", category: "valentine" },
+        { id: 42, name: "Add On", description: "Add On", price: "", image: "foto-produk/FT-02.jpeg", category: "valentine" },
         { id: 43, name: "Small Bouquet", description: "Bunga Valentine eksklusif dengan desain cantik", price: "Chat admin untuk harga", image: "foto-produk/FT-03.jpeg", category: "valentine" },
-        { id: 44, name: "Informasi", description: "", price: "Chat admin untuk harga", image: "foto-produk/FT-04.jpeg", category: "valentine" },
+        { id: 44, name: "Informasi", description: "informasi", price: "", image: "foto-produk/FT-04.jpeg", category: "valentine" },
         { id: 45, name: "Korean Buket", description: "Bouquet Valentine dengan warna-warna cinta", price: "Chat admin untuk harga", image: "foto-produk/FT-05.jpeg", category: "valentine" },
         { id: 46, name: "Thumbelina buket", description: "Rangkaian bunga premium Valentine Day", price: "Chat admin untuk harga", image: "foto-produk/FT-06.jpeg", category: "valentine" },
         { id: 47, name: "Butterfly Buket", description: "Bunga segar spesial untuk Valentine", price: "Chat admin untuk harga", image: "foto-produk/FT-07.jpeg", category: "valentine" },
@@ -442,3 +442,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
