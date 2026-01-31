@@ -41,19 +41,19 @@ Struktur:
     --soft-pink: #FFE6EF;
     --pink-accent: #FF8FAB;
     --pink-dark: #FB6F92;
-    
+
     --ocean-blue: #B8E1FF;
     --blue-accent: #5DA9E9;
     --blue-dark: #3A7FC4;
-    
+
     --tea-green: #D4F1E0;
     --green-accent: #7BCBA4;
     --green-dark: #5AA786;
-    
+
     --text-dark: #2C3E50;
     --text-medium: #5A6B7D;
     --text-light: #8A9BAD;
-    
+
     --bg-light: #FEFBF6;
     --bg-offwhite: #FFF9F2;
 }
@@ -244,15 +244,270 @@ header.scrolled {
     color: var(--pink-dark);
 }
 
+/* Valentine Banner Section */
+.valentine-banner {
+    background: linear-gradient(135deg, #FF1744 0%, #F50057 50%, #C51162 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.valentine-hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFFFFF' fill-opacity='1'%3E%3Cpath d='M40 60c-3.7-3.7-7.4-7.4-11.1-11.1-3.7-3.7-5.6-8.5-5.6-13.3 0-4.8 1.9-9.6 5.6-13.3 7.4-7.4 19.3-7.4 26.7 0 7.4 7.4 7.4 19.3 0 26.7L40 60z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    animation: float 10s ease-in-out infinite;
+}
+
+.btn-valentine {
+    background: white;
+    color: #C51162;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-valentine:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.5);
+    background: #FFF3F8;
+}
+
+/* Category Filter Buttons */
+.category-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: white;
+    border: 2px solid #E0E0E0;
+    border-radius: 50px;
+    font-weight: 600;
+    color: var(--text-medium);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.category-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: var(--pink-accent);
+    color: var(--pink-accent);
+}
+
+.category-btn.active {
+    background: linear-gradient(135deg, var(--pink-accent) 0%, var(--pink-dark) 100%);
+    color: white;
+    border-color: var(--pink-accent);
+    box-shadow: 0 4px 15px rgba(251, 111, 146, 0.3);
+}
+
+.category-btn.valentine-category {
+    border-color: #FF1744;
+}
+
+.category-btn.valentine-category:hover {
+    border-color: #F50057;
+    color: #F50057;
+}
+
+.category-btn.valentine-category.active {
+    background: linear-gradient(135deg, #FF1744 0%, #C51162 100%);
+    border-color: #FF1744;
+    box-shadow: 0 4px 15px rgba(255, 23, 68, 0.4);
+}
+
+
+/* Floating Love Images */
+.valentine-love {
+    position: absolute;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.valentine-love.love-1 {
+    width: 60px;
+    top: 10%;
+    left: 8%;
+    animation: floatLove1 8s ease-in-out infinite;
+}
+
+.valentine-love.love-2 {
+    width: 45px;
+    top: 25%;
+    right: 12%;
+    animation: floatLove2 10s ease-in-out infinite;
+}
+
+.valentine-love.love-3 {
+    width: 70px;
+    top: 60%;
+    left: 15%;
+    animation: floatLove3 12s ease-in-out infinite;
+}
+
+.valentine-love.love-4 {
+    width: 50px;
+    top: 70%;
+    right: 20%;
+    animation: floatLove4 9s ease-in-out infinite;
+}
+
+.valentine-love.love-5 {
+    width: 55px;
+    top: 15%;
+    right: 5%;
+    animation: floatLove5 11s ease-in-out infinite;
+}
+
+.valentine-love.love-6 {
+    width: 65px;
+    top: 80%;
+    left: 5%;
+    animation: floatLove6 13s ease-in-out infinite;
+}
+
+@keyframes floatLove1 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+
+    25% {
+        transform: translateY(-20px) rotate(5deg) scale(1.1);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(-3deg) scale(1.05);
+    }
+
+    75% {
+        transform: translateY(-25px) rotate(8deg) scale(1.15);
+    }
+}
+
+@keyframes floatLove2 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+
+    30% {
+        transform: translateY(-30px) rotate(-5deg) scale(1.2);
+    }
+
+    60% {
+        transform: translateY(-15px) rotate(7deg) scale(1.1);
+    }
+}
+
+@keyframes floatLove3 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+
+    25% {
+        transform: translateY(-18px) rotate(10deg) scale(1.15);
+    }
+
+    50% {
+        transform: translateY(-35px) rotate(-5deg) scale(1.25);
+    }
+
+    75% {
+        transform: translateY(-20px) rotate(3deg) scale(1.1);
+    }
+}
+
+@keyframes floatLove4 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+
+    40% {
+        transform: translateY(-22px) rotate(-8deg) scale(1.18);
+    }
+
+    80% {
+        transform: translateY(-12px) rotate(6deg) scale(1.08);
+    }
+}
+
+@keyframes floatLove5 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+
+    35% {
+        transform: translateY(-28px) rotate(12deg) scale(1.22);
+    }
+
+    70% {
+        transform: translateY(-16px) rotate(-4deg) scale(1.12);
+    }
+}
+
+@keyframes floatLove6 {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+
+    20% {
+        transform: translateY(-15px) rotate(-10deg) scale(1.08);
+    }
+
+    50% {
+        transform: translateY(-32px) rotate(5deg) scale(1.2);
+    }
+
+    80% {
+        transform: translateY(-20px) rotate(-7deg) scale(1.15);
+    }
+}
+
+/* Close Valentine Modal Button */
+
+#close-valentine-modal {
+    transition: transform 0.3s ease;
+}
+
+#close-valentine-modal:hover {
+    transform: rotate(90deg);
+}
+
+
 /* Floating Animation */
 .floating {
     animation: float 6s ease-in-out infinite;
 }
 
 @keyframes float {
-    0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(5deg); }
-    100% { transform: translateY(0px) rotate(0deg); }
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
 }
 
 /* Footer Styles */
@@ -304,12 +559,12 @@ footer {
         font-size: 2.5rem;
         line-height: 1.2;
     }
-    
+
     .info-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .footer-links {
         flex-direction: column;
         align-items: center;

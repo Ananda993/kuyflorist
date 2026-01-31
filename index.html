@@ -1,18 +1,89 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kyuflorist - Toko Bunga Bucket Bali</title>
-    
+    <title>Kyuflorist - Toko Bunga Bucket Bali | Florist Denpasar | Bunga Valentine</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Kyuflorist adalah toko bunga terpercaya di Bali dan Denpasar. Menyediakan buket bunga segar, bouquet Valentine, money bouquet, bloom box, dan papan bunga untuk berbagai acara. Pesan sekarang dengan harga terjangkau!">
+    <meta name="keywords"
+        content="kyuflorist, toko bunga bali, toko bunga denpasar, florist bali, florist denpasar, bunga valentine bali, bouquet bali, buket bunga denpasar, bunga segar bali, toko bunga online bali, bunga ulang tahun bali, bunga wisuda bali, papan bunga bali, bloom box bali, money bouquet bali, bunga pernikahan bali, korean bouquet bali, human size bouquet bali">
+    <meta name="author" content="Kyuflorist">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Indonesian">
+    <meta name="geo.region" content="ID-BA">
+    <meta name="geo.placename" content="Denpasar, Bali">
+    <meta name="geo.position" content="-8.670458;115.212631">
+    <meta name="ICBM" content="-8.670458, 115.212631">
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Kyuflorist - Toko Bunga Bucket Bali | Florist Denpasar">
+    <meta property="og:description"
+        content="Toko bunga terpercaya di Bali dan Denpasar. Menyediakan bouquet Valentine, money bouquet, bloom box, dan papan bunga. Pesan sekarang!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kyuflorist.com">
+    <meta property="og:image" content="https://kyuflorist.com/foto-produk/68bff876-e204-4130-b235-073fa09ea63d-0.jpg">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:site_name" content="Kyuflorist">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Kyuflorist - Toko Bunga Bucket Bali | Florist Denpasar">
+    <meta name="twitter:description"
+        content="Toko bunga terpercaya di Bali dan Denpasar. Menyediakan bouquet Valentine, money bouquet, bloom box untuk berbagai acara.">
+    <meta name="twitter:image" content="https://kyuflorist.com/foto-produk/68bff876-e204-4130-b235-073fa09ea63d-0.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://kyuflorist.com">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Kyuflorist",
+      "description": "Toko bunga terpercaya di Bali dan Denpasar menyediakan bouquet segar, bunga Valentine, money bouquet, bloom box, dan papan bunga",
+      "image": "https://kyuflorist.com/foto-produk/68bff876-e204-4130-b235-073fa09ea63d-0.jpg",
+      "telephone": "+6285847499015",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Denpasar",
+        "addressRegion": "Bali",
+        "addressCountry": "ID"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "-8.670458",
+        "longitude": "115.212631"
+      },
+      "url": "https://kyuflorist.com",
+      "priceRange": "Rp 50.000 - Rp 600.000",
+      "openingHours": "Mo-Su 08:00-20:00",
+      "paymentAccepted": "Cash, Transfer",
+      "currenciesAccepted": "IDR",
+      "areaServed": {
+        "@type": "City",
+        "name": "Bali"
+      },
+      "sameAs": [
+        "https://www.instagram.com/kyuflorist"
+      ]
+    }
+    </script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="icon" type="image/png" href="kyuflorist logo.png">
@@ -20,6 +91,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Header -->
     <header class="sticky top-0 z-50" id="main-header">
@@ -29,42 +101,47 @@
                     <img src="kyuflorist logo.png" alt="Kyuflorist Logo" class="h-14 w-auto">
                     <span class="text-xl font-bold font-display hidden md:block">Kyuflorist</span>
                 </a>
-                
+
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
                     <i data-lucide="menu" class="w-8 h-8"></i>
                 </button>
-                
+
                 <nav class="hidden md:flex space-x-8 items-center">
                     <a href="#hero" class="nav-link">Home</a>
                     <a href="#products" class="nav-link">Katalog</a>
                     <a href="#info" class="nav-link">Info Toko</a>
                     <a href="#contact" class="nav-link">Lokasi</a>
                 </nav>
-                
+
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="https://www.tiktok.com/@bucket_kyuflorist" target="_blank" class="p-2 rounded-full bg-white shadow-sm hover:shadow-md transition">
+                    <a href="https://www.tiktok.com/@bucket_kyuflorist" target="_blank"
+                        class="p-2 rounded-full bg-white shadow-sm hover:shadow-md transition">
                         <img src="tik-tok.png" alt="TikTok" class="h-5 w-5">
                     </a>
-                    <a href="https://wa.me/6285847499015" target="_blank" class="btn-primary px-5 py-2.5 rounded-full flex items-center space-x-2">
+                    <a href="https://wa.me/6285847499015" target="_blank"
+                        class="btn-primary px-5 py-2.5 rounded-full flex items-center space-x-2">
                         <i data-lucide="zap" class="w-4 h-4"></i>
                         <span>Order Cepat</span>
                     </a>
                 </div>
             </div>
-            
+
             <!-- Mobile Menu -->
-            <div id="mobile-menu" class="md:hidden bg-white mt-4 rounded-lg shadow-xl overflow-hidden transition-all duration-300 max-h-0">
+            <div id="mobile-menu"
+                class="md:hidden bg-white mt-4 rounded-lg shadow-xl overflow-hidden transition-all duration-300 max-h-0">
                 <div class="px-6 py-4 flex flex-col space-y-4">
                     <a href="#hero" class="nav-link py-2">Home</a>
                     <a href="#products" class="nav-link py-2">Katalog</a>
                     <a href="#info" class="nav-link py-2">Info Toko</a>
                     <a href="#contact" class="nav-link py-2">Lokasi</a>
                     <div class="pt-2 border-t border-gray-100 flex items-center justify-between">
-                        <a href="https://www.tiktok.com/@bucket_kyuflorist" target="_blank" class="p-2 rounded-full bg-gray-50">
+                        <a href="https://www.tiktok.com/@bucket_kyuflorist" target="_blank"
+                            class="p-2 rounded-full bg-gray-50">
                             <img src="tik-tok.png" alt="TikTok" class="h-5 w-5">
                         </a>
-                        <a href="https://wa.me/6285847499015" target="_blank" class="btn-primary px-5 py-2.5 rounded-full flex items-center space-x-2 text-sm">
+                        <a href="https://wa.me/6285847499015" target="_blank"
+                            class="btn-primary px-5 py-2.5 rounded-full flex items-center space-x-2 text-sm">
                             <i data-lucide="zap" class="w-4 h-4"></i>
                             <span>Order Cepat</span>
                         </a>
@@ -82,7 +159,8 @@
                 <div class="max-w-3xl mx-auto text-center">
                     <h1 class="hero-title text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
                         <span class="block">Bucket Bunga Cantik</span>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500">di Bali</span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500">di
+                            Bali</span>
                     </h1>
                     <p class="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
                         Toko Bunga Sejak 2021. Temukan rangkaian bunga sempurna untuk setiap momen spesial Anda.
@@ -92,7 +170,8 @@
                         <a href="#products" class="btn-primary px-8 py-3.5 rounded-full text-lg font-semibold">
                             Lihat Katalog
                         </a>
-                        <a href="https://wa.me/6285847499015" target="_blank" class="btn-secondary px-8 py-3.5 rounded-full text-lg font-semibold flex items-center justify-center gap-2">
+                        <a href="https://wa.me/6285847499015" target="_blank"
+                            class="btn-secondary px-8 py-3.5 rounded-full text-lg font-semibold flex items-center justify-center gap-2">
                             <i data-lucide="message-circle"></i>
                             Chat Sekarang
                         </a>
@@ -101,16 +180,51 @@
             </div>
         </section>
 
+        <!-- Valentine Banner Section -->
+        <section id="valentine" class="valentine-banner py-16 md:py-20 px-6 relative overflow-hidden">
+
+            <!-- Floating Love Images -->
+            <img src="love.png" alt="Love" class="valentine-love love-1">
+            <img src="love.png" alt="Love" class="valentine-love love-2">
+            <img src="love.png" alt="Love" class="valentine-love love-3">
+            <img src="love.png" alt="Love" class="valentine-love love-4">
+            <img src="love.png" alt="Love" class="valentine-love love-5">
+            <img src="love.png" alt="Love" class="valentine-love love-6">
+
+            <div class="container mx-auto relative z-10">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div
+                        class="inline-block mb-6 px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full border-2 border-white/30">
+                        <span class="text-white font-semibold">💕 Special Valentine Collection 💕</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+                        Valentine Day 2026
+                    </h2>
+                    <p class="text-xl md:text-2xl text-white/90 mb-2">14 Februari 2026</p>
+                    <p class="text-white/80 mb-8 max-w-2xl mx-auto">
+                        Rayakan cinta Anda dengan rangkaian bunga spesial Valentine dari Kyuflorist.
+                        Koleksi eksklusif yang dirancang khusus untuk momen berharga Anda.
+                    </p>
+                    <a href="#products"
+                        class="btn-valentine px-8 py-3.5 rounded-full text-lg font-semibold inline-block">
+                        Lihat Koleksi Valentine
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
         <!-- Info Section -->
         <section id="info" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Kenapa Memilih Kyuflorist?</h2>
                     <p class="text-gray-600 max-w-2xl mx-auto">
-                        Kami memberikan pelayanan terbaik dengan bunga segar pilihan untuk membuat momen spesial Anda semakin berkesan.
+                        Kami memberikan pelayanan terbaik dengan bunga segar pilihan untuk membuat momen spesial Anda
+                        semakin berkesan.
                     </p>
                 </div>
-                
+
                 <div class="info-grid grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     <div class="info-card clock p-8 text-center">
                         <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-green-50 flex items-center justify-center">
@@ -122,7 +236,7 @@
                             Siap melayani pesanan Anda kapan saja
                         </p>
                     </div>
-                    
+
                     <div class="info-card truck p-8 text-center">
                         <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-blue-50 flex items-center justify-center">
                             <i data-lucide="truck" class="w-8 h-8 text-blue-600"></i>
@@ -133,7 +247,7 @@
                             Area Bali dan Sekitarnya
                         </p>
                     </div>
-                    
+
                     <div class="info-card phone p-8 text-center">
                         <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-pink-50 flex items-center justify-center">
                             <i data-lucide="phone-call" class="w-8 h-8 text-pink-600"></i>
@@ -145,21 +259,24 @@
                         </p>
                     </div>
                 </div>
-                
+
                 <!-- Instagram Card -->
                 <div class="mt-20 max-w-4xl mx-auto">
                     <div class="instagram-card rounded-2xl overflow-hidden">
                         <div class="p-8 md:p-10 flex flex-col md:flex-row items-center gap-8">
-                            <div class="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                            <div
+                                class="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white flex items-center justify-center flex-shrink-0">
                                 <i data-lucide="instagram" class="w-12 h-12 text-pink-500"></i>
                             </div>
                             <div class="text-center md:text-left">
-                                <h3 class="text-2xl md:text-3xl font-display font-bold mb-2">Ikuti Kami di Instagram</h3>
+                                <h3 class="text-2xl md:text-3xl font-display font-bold mb-2">Ikuti Kami di Instagram
+                                </h3>
                                 <p class="text-white/90 mb-6 max-w-md">
                                     Lihat karya terbaru, promosi spesial, dan inspirasi rangkaian bunga dari Kyuflorist.
                                     Update setiap hari dengan koleksi bunga segar kami.
                                 </p>
-                                <a href="https://www.instagram.com/kyuflorist/" target="_blank" class="inline-block bg-white text-pink-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition transform hover:-translate-y-1">
+                                <a href="https://www.instagram.com/kyuflorist/" target="_blank"
+                                    class="inline-block bg-white text-pink-600 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition transform hover:-translate-y-1">
                                     @kyuflorist
                                 </a>
                             </div>
@@ -179,7 +296,22 @@
                     </p>
                 </div>
 
-                <!-- Product Grid -->
+                <!-- Category Filters -->
+                <div class="flex flex-wrap justify-center gap-4 mb-12">
+                    <button class="category-btn active" data-category="all">
+                        <i data-lucide="grid-3x3" class="w-4 h-4"></i>
+                        <span>Semua Produk</span>
+                    </button>
+                    <button class="category-btn valentine-category" data-category="valentine">
+                        <i data-lucide="heart" class="w-4 h-4"></i>
+                        <span>Valentine Collection</span>
+                    </button>
+                    <button class="category-btn" data-category="regular">
+                        <i data-lucide="flower-2" class="w-4 h-4"></i>
+                        <span>Produk Reguler</span>
+                    </button>
+                </div>
+
                 <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                     <!-- Products will be loaded here by script.js -->
                 </div>
@@ -187,24 +319,27 @@
         </section>
 
         <!-- Product Modal -->
-        <div id="product-modal" class="modal fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
-            <div class="modal-content bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-xl transform transition-transform duration-300 scale-95">
+        <div id="product-modal"
+            class="modal fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+            <div
+                class="modal-content bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-xl transform transition-transform duration-300 scale-95">
                 <div class="p-6 relative">
                     <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
                         <i data-lucide="x" class="w-7 h-7"></i>
                     </button>
-                    
+
                     <div class="grid md:grid-cols-2 gap-8 mt-8">
                         <div class="bg-gray-100 rounded-xl flex items-center justify-center overflow-hidden">
                             <img id="modal-image" src="" alt="Product" class="w-full h-full object-cover">
                         </div>
-                        
+
                         <div class="flex flex-col justify-center">
                             <h3 id="modal-title" class="text-3xl font-display font-bold mb-3"></h3>
                             <p id="modal-description" class="text-gray-600 mb-4"></p>
                             <div id="modal-price" class="text-2xl font-bold text-pink-500 my-4"></div>
-                            
-                            <a href="#" id="modal-buy-now" target="_blank" class="btn-primary w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
+
+                            <a href="#" id="modal-buy-now" target="_blank"
+                                class="btn-primary w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
                                 <i data-lucide="shopping-cart"></i>
                                 chat admin
                             </a>
@@ -213,6 +348,132 @@
                 </div>
             </div>
         </div>
+
+        <!-- Valentine Information Modal -->
+        <div id="valentine-info-modal"
+            class="modal fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden">
+            <div
+                class="modal-content bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform transition-transform duration-300 scale-95">
+                <div class="bg-gradient-to-r from-pink-500 to-red-500 p-6 text-white rounded-t-2xl">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="info" class="w-8 h-8"></i>
+                            <h3 class="text-2xl font-display font-bold">Informasi Penting Valentine</h3>
+                        </div>
+                        <button id="close-valentine-modal" class="text-white hover:text-pink-100 transition">
+                            <i data-lucide="x" class="w-7 h-7"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-8">
+                    <div class="mb-6 text-center">
+                        <h4 class="text-2xl font-bold text-gray-800 mb-2">HALLO SOBAT KYUFLORIST 💕</h4>
+                        <p class="text-gray-600">Mohon baca informasi penting berikut sebelum memesan</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Pre Order Info -->
+                        <div class="bg-pink-50 border-l-4 border-pink-500 p-4 rounded-r-lg">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="calendar" class="w-5 h-5 text-pink-600 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h5 class="font-bold text-pink-900 mb-1">Pre-Order Dibuka</h5>
+                                    <p class="text-pink-800">Pre-order untuk Valentine Day dibuka mulai <strong>1
+                                            Februari 2026</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price Warning -->
+                        <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="alert-triangle" class="w-5 h-5 text-red-600 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h5 class="font-bold text-red-900 mb-1">Penyesuaian Harga</h5>
+                                    <p class="text-red-800">Harga pada tanggal <strong>13-14 Februari 2026</strong> akan
+                                        berbeda dari harga normal karena harga bunga dari petani naik 3x lipat. Di luar
+                                        tanggal tersebut, harga normal.</p>
+                                    <p class="text-red-700 text-sm mt-2">Mohon permakluman dan mohon maaf atas
+                                        ketidaknyamanannya 🙏</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DP Requirement -->
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-r-lg">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="credit-card" class="w-5 h-5 text-yellow-600 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h5 class="font-bold text-yellow-900 mb-1">Wajib DP & Format Order</h5>
+                                    <p class="text-yellow-800">Untuk pemesanan <strong>WAJIB mengisi format order dan
+                                            DP</strong> sesuai yang diberikan oleh kami.</p>
+                                    <p class="text-yellow-800 mt-2"><strong>⚠️ Jika tidak mengisi, pesanan dianggap
+                                            tidak kami keep!</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cancellation Policy -->
+                        <div class="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-lg">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="x-circle" class="w-5 h-5 text-orange-600 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h5 class="font-bold text-orange-900 mb-1">Kebijakan Cancel</h5>
+                                    <p class="text-orange-800">Pastikan orderan sudah FIX dan tidak terjadi cancel.</p>
+                                    <p class="text-orange-800 mt-2"><strong>⚠️ CANCEL = DP DINYATAKAN HANGUS!!</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pickup Time -->
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="clock" class="w-5 h-5 text-blue-600 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h5 class="font-bold text-blue-900 mb-1">Waktu Pengambilan</h5>
+                                    <p class="text-blue-800">Bouquet bunga <strong>TIDAK BOLEH diambil lebih
+                                            awal</strong> dari jam yang diisi di format order karena bouquet dibuat
+                                        sesuai urutan jam yang di-order.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Info -->
+                        <div class="bg-purple-50 border-l-4 border-purple-500 p-4 rounded-r-lg">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="truck" class="w-5 h-5 text-purple-600 mt-1 flex-shrink-0"></i>
+                                <div>
+                                    <h5 class="font-bold text-purple-900 mb-1">Pengiriman</h5>
+                                    <p class="text-purple-800">Untuk delivery by GoSend/Team <strong>TIDAK BOLEH REQUEST
+                                            JAM</strong>. Bouquet diantarkan 1 per 1 sesuai jalur yang dituju.</p>
+                                    <p class="text-purple-800 mt-2">Pastikan:</p>
+                                    <ul class="list-disc list-inside text-purple-800 mt-1 space-y-1">
+                                        <li>Nomor HP penerima aktif</li>
+                                        <li>Alamat yang dituju pas dan jelas</li>
+                                        <li>Agar kurir tidak kesasar</li>
+                                        <li>Nomor tidak off supaya kurir gampang menghubungi penerima</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex gap-4">
+                        <button id="understood-valentine" class="btn-primary flex-1 py-3.5 rounded-lg font-semibold">
+                            Saya Mengerti
+                        </button>
+                        <a href="https://wa.me/6285847499015" target="_blank"
+                            class="btn-secondary flex-1 py-3.5 rounded-lg font-semibold text-center flex items-center justify-center gap-2">
+                            <i data-lucide="message-circle"></i>
+                            Tanya Admin
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Contact & Location Section -->
         <section id="contact" class="py-20 md:py-28 bg-gradient-to-b from-gray-50 to-tea-green">
@@ -223,7 +484,7 @@
                         Datang langsung ke toko kami atau hubungi untuk pemesanan dan informasi lebih lanjut.
                     </p>
                 </div>
-                
+
                 <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
                     <div class="flex flex-col md:flex-row">
                         <div class="w-full md:w-1/2 p-8 md:p-10">
@@ -242,30 +503,29 @@
                                     <p>0858-4749-9015 (WhatsApp/Call)</p>
                                 </div>
                             </div>
-                            
+
                             <div class="mt-8 space-y-4">
-                                <a href="https://wa.me/6285847499015" target="_blank" class="btn-secondary w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
+                                <a href="https://wa.me/6285847499015" target="_blank"
+                                    class="btn-secondary w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
                                     <i data-lucide="message-circle"></i>
                                     Chat via WhatsApp
                                 </a>
-                                <a href="https://www.instagram.com/kyuflorist/" target="_blank" class="instagram-card w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
+                                <a href="https://www.instagram.com/kyuflorist/" target="_blank"
+                                    class="instagram-card w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
                                     <i data-lucide="instagram"></i>
                                     Follow Instagram
                                 </a>
-                                <a href="https://maps.app.goo.gl/DcHYoi6f1o79T3c9A" target="_blank" class="bg-gradient-to-r from-blue-400 to-blue-600 text-white w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
+                                <a href="https://maps.app.goo.gl/DcHYoi6f1o79T3c9A" target="_blank"
+                                    class="bg-gradient-to-r from-blue-400 to-blue-600 text-white w-full py-3.5 rounded-lg font-semibold flex items-center justify-center gap-2">
                                     <i data-lucide="map-pin"></i>
                                     Lihat di Google Maps
                                 </a>
                             </div>
                         </div>
                         <div class="w-full md:w-1/2 h-80 md:h-auto">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.498818882046!2d115.1982186748981!3d-8.643340191402246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23f7a09855555%3A0x8c7855f52b6d1b7b!2sJl.%20Bulu%20Indah%20No.10%2C%20Pemecutan%20Kaja%2C%20Kec.%20Denpasar%20Utara%2C%20Kota%20Denpasar%2C%20Bali%2080111!5e0!3m2!1sid!2sid!4v1717920000000!5m2!1sid!2sid" 
-                                width="100%" 
-                                height="100%" 
-                                style="border:0;" 
-                                allowfullscreen="" 
-                                loading="lazy" 
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.498818882046!2d115.1982186748981!3d-8.643340191402246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd23f7a09855555%3A0x8c7855f52b6d1b7b!2sJl.%20Bulu%20Indah%20No.10%2C%20Pemecutan%20Kaja%2C%20Kec.%20Denpasar%20Utara%2C%20Kota%20Denpasar%2C%20Bali%2080111!5e0!3m2!1sid!2sid!4v1717920000000!5m2!1sid!2sid"
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
@@ -286,21 +546,25 @@
                         <span class="text-xl font-display font-bold">Kyuflorist</span>
                     </div>
                     <p class="text-gray-700 mb-4">
-                        Toko bunga bucket terbaik di Bali sejak 2021, menyediakan rangkaian bunga segar untuk setiap momen spesial Anda.
+                        Toko bunga bucket terbaik di Bali sejak 2021, menyediakan rangkaian bunga segar untuk setiap
+                        momen spesial Anda.
                     </p>
                     <div class="flex gap-4 mt-6">
-                        <a href="https://www.instagram.com/kyuflorist/" target="_blank" class="bg-white/20 p-2.5 rounded-full hover:bg-white/30 transition">
+                        <a href="https://www.instagram.com/kyuflorist/" target="_blank"
+                            class="bg-white/20 p-2.5 rounded-full hover:bg-white/30 transition">
                             <i data-lucide="instagram" class="w-5 h-5"></i>
                         </a>
-                        <a href="https://wa.me/6285847499015" target="_blank" class="bg-white/20 p-2.5 rounded-full hover:bg-white/30 transition">
+                        <a href="https://wa.me/6285847499015" target="_blank"
+                            class="bg-white/20 p-2.5 rounded-full hover:bg-white/30 transition">
                             <i data-lucide="message-circle" class="w-5 h-5"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@bucket_kyuflorist" target="_blank" class="bg-white/20 p-2.5 rounded-full hover:bg-white/30 transition">
+                        <a href="https://www.tiktok.com/@bucket_kyuflorist" target="_blank"
+                            class="bg-white/20 p-2.5 rounded-full hover:bg-white/30 transition">
                             <img src="tik-tok.png" alt="TikTok" class="w-5 h-5">
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="md:w-1/3">
                     <h4 class="font-display font-bold text-lg mb-6">Tautan Cepat</h4>
                     <ul class="space-y-3">
@@ -308,10 +572,11 @@
                         <li><a href="#products" class="footer-link inline-block">Katalog Produk</a></li>
                         <li><a href="#info" class="footer-link inline-block">Info Toko</a></li>
                         <li><a href="#contact" class="footer-link inline-block">Kontak & Lokasi</a></li>
-                        <li><a href="https://drive.google.com/drive/folders/1hEIvZRPXCxnrgsUY-rz-JyoYmRroHSYs" target="_blank" class="footer-link inline-block">Katalog Lengkap</a></li>
+                        <li><a href="https://drive.google.com/drive/folders/1hEIvZRPXCxnrgsUY-rz-JyoYmRroHSYs"
+                                target="_blank" class="footer-link inline-block">Katalog Lengkap</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="md:w-1/3">
                     <h4 class="font-display font-bold text-lg mb-6">Kontak Kami</h4>
                     <div class="space-y-4">
@@ -330,7 +595,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="pt-8 border-t border-white/20 text-center">
                 <p>&copy; <span id="year"></span> Kyuflorist. All Rights Reserved.</p>
                 <p class="text-sm mt-2 opacity-80">Dibuat dengan ❤️ oleh rakit studio</p>
@@ -341,4 +606,5 @@
     <!-- Custom JS -->
     <script src="script.js"></script>
 </body>
+
 </html>
