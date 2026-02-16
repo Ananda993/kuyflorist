@@ -117,26 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         { id: 39, name: "Papan bunga", description: "start harga 250.000-600.000--Free Design", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-38.jpg" },
 
-        { id: 40, name: "Sewa standing foto", description: "chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-39.jpg", category: "regular" },
-
-        // Valentine Products
-        { id: 41, name: "Valentine Day", description: "", price: "", image: "foto-produk/FT-01.jpeg", category: "valentine" },
-        { id: 42, name: "Add On", description: "Add On", price: "", image: "foto-produk/FT-02.jpeg", category: "valentine" },
-        { id: 43, name: "Small Bouquet", description: "Bunga Valentine eksklusif dengan desain cantik", price: "Chat admin untuk harga", image: "foto-produk/FT-03.jpeg", category: "valentine" },
-        { id: 44, name: "Informasi", description: "informasi", price: "", image: "foto-produk/FT-04.jpeg", category: "valentine" },
-        { id: 45, name: "Korean Buket", description: "Bouquet Valentine dengan warna-warna cinta", price: "Chat admin untuk harga", image: "foto-produk/FT-05.jpeg", category: "valentine" },
-        { id: 46, name: "Thumbelina buket", description: "Rangkaian bunga premium Valentine Day", price: "Chat admin untuk harga", image: "foto-produk/FT-06.jpeg", category: "valentine" },
-        { id: 47, name: "Butterfly Buket", description: "Bunga segar spesial untuk Valentine", price: "Chat admin untuk harga", image: "foto-produk/FT-07.jpeg", category: "valentine" },
-        { id: 48, name: "Medium Bouqet", description: "Ungkapkan cinta dengan bunga Valentine ini", price: "Chat admin untuk harga", image: "foto-produk/FT-08.jpeg", category: "valentine" },
-        { id: 49, name: "Round Buket 50 Tangkai", description: "Bouquet romantis untuk momen istimewa", price: "Chat admin untuk harga", image: "foto-produk/FT-09.jpeg", category: "valentine" },
-        { id: 50, name: "Round Bouqet Human Size", description: "Koleksi Valentine dengan desain elegan", price: "Chat admin untuk harga", image: "foto-produk/FT-10.jpeg", category: "valentine" },
-        { id: 51, name: "Round Buket 30 Tangkai", description: "Bunga Valentine pilihan terbaik", price: "Chat admin untuk harga", image: "foto-produk/FT-11.jpeg", category: "valentine" },
-        { id: 52, name: "Lily Bouqet", description: "Hadiah Valentine penuh makna", price: "Chat admin untuk harga", image: "foto-produk/FT-12.jpeg", category: "valentine" },
-        { id: 53, name: "Human Size Bouqet", description: "Rangkaian bunga Valentine eksklusif", price: "Chat admin untuk harga", image: "foto-produk/FT-13.jpeg", category: "valentine" },
-        { id: 54, name: "Spesial Edition", description: "Bouquet Valentine dengan sentuhan special", price: "Chat admin untuk harga", image: "foto-produk/FT-14.jpeg", category: "valentine" },
-        { id: 55, name: "Round Bouqet Human Size", description: "Bunga Valentine untuk kenangan indah", price: "Chat admin untuk harga", image: "foto-produk/FT-15.jpeg", category: "valentine" },
-        { id: 56, name: "Special Edition", description: "Koleksi Valentine premium terbaik", price: "Chat admin untuk harga", image: "foto-produk/FT-16.jpeg", category: "valentine" },
-        { id: 57, name: "Spesial Edition", description: "Bouquet Valentine pilihan istimewa", price: "Chat admin untuk harga", image: "foto-produk/FT-17.jpeg", category: "valentine" }
+        { id: 40, name: "Sewa standing foto", description: "chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-39.jpg", category: "regular" }
 
     ];
 
@@ -314,12 +295,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- CATEGORY FILTERING ---
     let currentCategory = 'all';
-    let valentineInfoShown = false;
-
-    // Valentine modal elements
-    const valentineInfoModal = document.getElementById('valentine-info-modal');
-    const closeValentineModal = document.getElementById('close-valentine-modal');
-    const understoodValentineBtn = document.getElementById('understood-valentine');
 
     // Load products with filter
     function loadProductsByCategory(category) {
@@ -327,9 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!productGrid) return;
             let filteredProducts = products;
 
-            if (category === 'valentine') {
-                filteredProducts = products.filter(p => p.category === 'valentine');
-            } else if (category === 'regular') {
+            if (category === 'regular') {
                 filteredProducts = products.filter(p => !p.category || p.category === 'regular');
             }
 
@@ -372,12 +345,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.addEventListener('click', function () {
             const category = this.dataset.category;
 
-            // If Valentine category is clicked and info hasn't been shown
-            if (category === 'valentine' && !valentineInfoShown) {
-                showValentineInfo();
-                return;
-            }
-
             // Update active state
             document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
             this.classList.add('active');
@@ -386,60 +353,6 @@ document.addEventListener('DOMContentLoaded', () => {
             currentCategory = category;
             loadProductsByCategory(category);
         });
-    });
-
-    // Show Valentine information modal
-    function showValentineInfo() {
-        valentineInfoModal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        setTimeout(() => {
-            valentineInfoModal.querySelector('.modal-content').classList.remove('scale-95');
-            valentineInfoModal.querySelector('.modal-content').classList.add('scale-100');
-        }, 10);
-    }
-
-    // Close Valentine information modal
-    function closeValentineInfo() {
-        valentineInfoModal.querySelector('.modal-content').classList.remove('scale-100');
-        valentineInfoModal.querySelector('.modal-content').classList.add('scale-95');
-        setTimeout(() => {
-            valentineInfoModal.classList.add('hidden');
-            document.body.style.overflow = '';
-        }, 300);
-    }
-
-    // Valentine modal event listeners
-    if (closeValentineModal) {
-        closeValentineModal.addEventListener('click', closeValentineInfo);
-    }
-
-    if (understoodValentineBtn) {
-        understoodValentineBtn.addEventListener('click', () => {
-            valentineInfoShown = true;
-            closeValentineInfo();
-
-            // Switch to Valentine category
-            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector('.valentine-category').classList.add('active');
-            currentCategory = 'valentine';
-            loadProductsByCategory('valentine');
-        });
-    }
-
-    // Close Valentine modal on overlay click
-    if (valentineInfoModal) {
-        valentineInfoModal.addEventListener('click', (e) => {
-            if (e.target === valentineInfoModal) {
-                closeValentineInfo();
-            }
-        });
-    }
-
-    // Close Valentine modal on Escape key
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && valentineInfoModal && !valentineInfoModal.classList.contains('hidden')) {
-            closeValentineInfo();
-        }
     });
 });
 
