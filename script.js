@@ -39,11 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- PRODUCT DATA ---
     const products = [
-        { id: 1, name: "Cara Pemesanan", description: "Cara Pesan di KyuFlorist", price: "Silahkan di Baca", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-0.jpg" },
+        { id: 1, name: "Cara Pemesanan", description: "Cara Pesan di KyuFlorist", price: "Silahkan di Baca", image: "foto-produk/katalog2026.png" },
 
-        { id: 2, name: "Katalog Bouqet 50.000", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-1.jpg" },
+        { id: 43, name: "Informasi Penting", description: "Informasi penting untuk pelanggan KyuFlorist", price: "Silahkan di Baca", image: "foto-baru/just-information.png" },
 
-        { id: 3, name: "Katalog Bouqet 100.000", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-2.jpg" },
+        { id: 2, name: "Katalog Bouqet 50.000", description: "untuk harga chat admin", price: "", image: "foto-baru/bouqet-50.000.png" },
+
+        { id: 3, name: "Katalog Bouqet 100.000", description: "untuk harga chat admin", price: "", image: "foto-baru/bouqet-100.000.png" },
 
         { id: 4, name: "Katalog Bouqet 100.000", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-3.jpg" },
 
@@ -117,7 +119,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         { id: 39, name: "Papan bunga", description: "start harga 250.000-600.000--Free Design", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-38.jpg" },
 
-        { id: 40, name: "Sewa standing foto", description: "chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-39.jpg", category: "regular" }
+        { id: 40, name: "Sewa standing foto", description: "chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-39.jpg", category: "regular" },
+
+        { id: 41, name: "Human Size Bouqet", description: "Bouqet ukuran besar seukuran manusia, untuk harga chat admin", price: "", image: "foto-baru/human-size-bouqet.png" },
+
+        { id: 42, name: "Human Size Bouqet 2", description: "Bouqet ukuran besar seukuran manusia, untuk harga chat admin", price: "", image: "foto-baru/human-size-bouqet2.png" },
+
+
+        { id: 44, name: "Korean Buket", description: "Buket bergaya Korea, untuk harga chat admin", price: "", image: "foto-baru/korean-uket.png" },
+
+        { id: 45, name: "Lily Bouqet", description: "Bouqet bunga lily, untuk harga chat admin", price: "", image: "foto-baru/lily-bouqet.png" },
+
+        { id: 46, name: "Pre-Order H-3", description: "Produk pre-order, pemesanan minimal H-3 sebelum hari H", price: "Silahkan di Baca", image: "foto-baru/pree-order_h-3.png" },
+
+        { id: 47, name: "Round Bouqet Human Size", description: "Bouqet bulat ukuran besar seukuran manusia, untuk harga chat admin", price: "", image: "foto-baru/round-bouqet-human-size.png" },
+
+        { id: 48, name: "Round Bouqet Human Size 3", description: "Bouqet bulat ukuran besar seukuran manusia, untuk harga chat admin", price: "", image: "foto-baru/round-bouqet-human-size3.png" },
+
+        { id: 49, name: "Round Buket 50 Tangkai", description: "Bouqet bulat berisi 50 tangkai bunga, untuk harga chat admin", price: "", image: "foto-baru/round-buket-50-tangkai.png" },
+
+        { id: 50, name: "Thumbelina Buket", description: "Buket Thumbelina mini nan cantik, untuk harga chat admin", price: "", image: "foto-baru/thumbelina-buket.png" }
 
     ];
 
