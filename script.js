@@ -34,8 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize icons
     lucide.createIcons();
 
-    // Set current year in footer
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Set footer year range from 2025 to current year
+    const startYear = 2025;
+    const currentYear = new Date().getFullYear();
+    document.getElementById('year').textContent = currentYear > startYear
+        ? `${startYear} - ${currentYear}`
+        : `${startYear}`;
 
     // --- PRODUCT DATA ---
     const products = [
