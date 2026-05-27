@@ -182,6 +182,35 @@ header.scrolled {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.hero-admin-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Parcel card variant inside hero panel */
+.hero-admin-card-parcel {
+    background: linear-gradient(150deg, rgba(240, 253, 244, 0.98), rgba(236, 253, 245, 0.95));
+    border: 1.5px solid rgba(16, 185, 129, 0.35);
+}
+
+.hero-admin-tag-parcel {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(5, 150, 105, 0.15));
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #065f46;
+}
+
+.hero-admin-icon-parcel {
+    color: #059669;
+}
+
+.hero-admin-btn-parcel {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.32);
+}
+
+.hero-admin-btn-parcel:hover {
+    box-shadow: 0 9px 22px rgba(16, 185, 129, 0.42);
+}
+
 .hero-admin-card {
     background: linear-gradient(150deg, rgba(255, 255, 255, 0.96), rgba(246, 252, 255, 0.94));
     border-radius: 16px;
@@ -428,6 +457,123 @@ footer {
     width: 100%;
 }
 
+/* Parcel Button (Hero) */
+.btn-parcel {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn-parcel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+}
+
+/* Parcel Section */
+.parcel-section {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #f0f9ff 100%);
+}
+
+.parcel-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+    border: 1.5px solid rgba(16, 185, 129, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.parcel-card::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.parcel-card::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: -40px;
+    width: 160px;
+    height: 160px;
+    background: radial-gradient(circle, rgba(251, 111, 146, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.parcel-icon-wrapper {
+    width: 110px;
+    height: 110px;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(5, 150, 105, 0.08));
+    border: 2px solid rgba(16, 185, 129, 0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 5s ease-in-out infinite;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+}
+
+.parcel-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.parcel-title {
+    background: linear-gradient(135deg, #065f46, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.parcel-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: #065f46;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    transition: all 0.25s ease;
+}
+
+.parcel-tag:hover {
+    background: rgba(16, 185, 129, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-parcel-main {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-parcel-main:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.5);
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .hero-title {
@@ -449,7 +595,8 @@ footer {
         padding: 1rem;
     }
 
-    .hero-admin-grid {
+    .hero-admin-grid,
+    .hero-admin-grid-3 {
         grid-template-columns: 1fr;
     }
 
