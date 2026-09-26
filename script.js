@@ -1,290 +1,354 @@
-/**
- * Kyuflorist Bali - Core Web Engine & Interactivity
- * Handles Navigation, Mobile Drawer Menu, Universal Branch & Contact Modal,
- * and WhatsApp Order Message with Direct Photo Preview Link (Clean Plaintext Format)
- */
+/*
+Dokumentasi JavaScript untuk Kyuflorist
 
-(() => {
-  'use strict';
+Fungsionalitas:
+1.  **Inisialisasi**: 
+    - Mengaktifkan ikon Lucide.
+    - Mengatur tahun saat ini di footer.
+    - Memuat produk ke dalam katalog.
 
-  const SITE_BASE_URL = 'https://kyuflorist.netlify.app';
+2.  **Data Produk**: 
+    - `products`: Array yang berisi objek-objek produk. Setiap objek memiliki id, nama, deskripsi, harga, dan path gambar.
 
-  // Branch WhatsApp & Location Configurations
-  const BRANCHES = {
-    denpasar: {
-      name: 'Cabang Denpasar (Pusat)',
-      phone: '6285847499015',
-      address: 'Jl. Bulu Indah No. 10, Denpasar',
-      hours: '09.00 - 19.00 WITA',
-      areas: 'Denpasar, Sanur, Kuta, Seminyak, Canggu, Jimbaran, Nusa Dua',
-      maps: 'https://maps.google.com/?q=Kyuflorist+Denpasar+Jl+Bulu+Indah+No+10+Denpasar+Bali'
-    },
-    sempidi: {
-      name: 'Cabang Sempidi (Mengwi)',
-      phone: '6285785071816',
-      address: 'Jl. Raya Lukluk - Sempidi No.15, Mengwi',
-      hours: '09.00 - 17.00 WITA (Buka Setiap Hari)',
-      areas: 'Tabanan, Mengwi, Abiansemal, Kapal, Dalung, Canggu, Badung',
-      maps: 'https://maps.google.com/?q=Kyuflorist+Sempidi+Jl+Raya+Lukluk+-+Sempidi+No+15+Mengwi+Bali'
-    }
-  };
+3.  **Render Produk**: 
+    - `loadProducts()`: Mengambil data dari array `products`, membuat kartu HTML untuk setiap produk, dan memasukkannya ke dalam `product-grid`. Juga menambahkan event listener ke setiap tombol "Beli Sekarang" dan gambar produk.
 
-  /**
-   * Format absolute public image URL with proper URI encoding
-   * for automatic WhatsApp link preview thumbnail generation
-   */
-  const getFullImageUrl = (imagePath) => {
-    if (!imagePath) return '';
-    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
-      return imagePath;
-    }
-    const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-    return encodeURI(`${SITE_BASE_URL}/${cleanPath}`);
-  };
+4.  **Tombol Beli Sekarang**: 
+    - `handleBuyNowClick()`: Saat tombol di-klik, fungsi ini mengambil nama produk dari atribut data, membuat pesan WhatsApp, dan mengarahkan pengguna ke URL WhatsApp.
 
-  /**
-   * Helper to generate WhatsApp order URLs
-   */
-  const buildWaUrl = (phone, text) => {
-    return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-  };
+5.  **Modal Produk**: 
+    - `openProductModal()`: Menampilkan modal dengan detail produk yang di-klik.
+    - `closeProductModal()`: Menutup modal produk. Menambahkan event listener untuk keyboard (tombol Escape).
 
-  /**
-   * Open the Branch & Contact Selection Modal
-   * @param {Object|null} [product] Optional product object { name, price, image, categoryLabel }
-   * @param {'order'|'branch'|'contact'} [mode='order'] Mode of the modal
-   */
-  const openOrderModal = (product = null, mode = 'order') => {
-    const modal = document.getElementById('branch-order-modal');
-    if (!modal) return;
+6.  **Menu Mobile**: 
+    - `toggleMobileMenu()`: Menampilkan atau menyembunyikan menu navigasi mobile.
 
-    const prodSummary = document.getElementById('modal-product-card');
-    const prodImg = document.getElementById('modal-prod-image');
-    const prodTitle = document.getElementById('modal-prod-title');
-    const prodPrice = document.getElementById('modal-prod-price');
-    const prodTag = document.getElementById('modal-prod-category');
-    const modalHeading = document.getElementById('modal-heading');
-    const modalSubtitle = document.getElementById('modal-subtitle');
-    const btnDenpasar = document.getElementById('btn-order-denpasar');
-    const btnSempidi = document.getElementById('btn-order-sempidi');
+7.  **Efek Scroll Header**:
+    - `handleScroll()`: Menambahkan class `scrolled` pada header saat halaman di-scroll.
 
-    if (product && product.name) {
-      // Product ordering mode with clean bullet formatting (no emojis to prevent encoding issues)
-      if (prodSummary) prodSummary.style.display = 'flex';
-      if (prodImg) {
-        prodImg.src = product.image || 'kyuflorist logo.png';
-        prodImg.alt = product.name;
-      }
-      if (prodTitle) prodTitle.textContent = product.name;
-      if (prodPrice) prodPrice.textContent = product.price || '';
-      if (prodTag) prodTag.textContent = product.categoryLabel || 'Buket Bunga';
-      if (modalHeading) modalHeading.textContent = 'Pilih Cabang Pemesanan';
-      if (modalSubtitle) {
-        modalSubtitle.textContent = 'Pilih cabang terdekat dari alamat penerima untuk proses lebih cepat & hemat ongkir:';
-      }
+8.  **Event Listeners**: 
+    - Listener untuk tombol menu mobile, scroll, tombol "Beli Sekarang", gambar produk, dan penutup modal (klik overlay, tombol close, dan tombol Escape).
+*/
 
-      const photoUrl = getFullImageUrl(product.image);
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize icons
+    lucide.createIcons();
 
-      const msgDenpasar = `Halo Admin Kyuflorist Denpasar, saya mau order:
-- Produk: *${product.name}*
-- Harga: *${product.price}*
-- Foto Produk: ${photoUrl}
+    // Set footer year range from 2025 to current year
+    const startYear = 2025;
+    const currentYear = new Date().getFullYear();
+    document.getElementById('year').textContent = currentYear > startYear
+        ? `${startYear} - ${currentYear}`
+        : `${startYear}`;
 
-Mohon info ketersediaan bunga dan estimasi pengirimannya ya. Terima kasih!`;
+    // --- PRODUCT DATA ---
+    // PERHATIAN: SEMUA KATALOG SEMENTARA DISEMBUNYIKAN karena update harga
+    // Untuk menampilkan kembali katalog, aktifkan kembali data produk di bawah ini
+    const products = [
+        // SEMUA KATALOG PRODUK (SEMENTARA DISEMBUNYIKAN)
+        /* 
+        { id: 1, name: "Cara Pemesanan", description: "Cara Pesan di Kyuflorist", price: "Silahkan di Baca", image: "foto-produk/katalog2026.png" },
+        { id: 43, name: "Informasi Penting", description: "Informasi penting untuk pelanggan Kyuflorist", price: "Silahkan di Baca", image: "foto-baru/just-information.png" },
+        { id: 46, name: "Pre-Order H-3", description: "Produk pre-order, pemesanan minimal H-3 sebelum hari H", price: "Silahkan di Baca", image: "foto-baru/pree-order_h-3.png" },
+        { id: 3, name: "Katalog Bouqet 100.000", description: "untuk harga chat admin", price: "", image: "foto-baru/bouqet-100.000.png" },
+        { id: 4, name: "Katalog Bouqet 100.000", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-3.jpg" },
+        { id: 5, name: "Katalog Bouqet 150.000", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-4.jpg" },
+        { id: 6, name: "Katalog Bouqet 150.000", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-5.jpg" },
+        { id: 7, name: "Bouqet Boneka", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-6.jpg" },
+        { id: 8, name: "Katalog Bouqet 200.000", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-7.jpg" },
+        { id: 9, name: "Katalog Bouqet 200.000", description: "Free Kartu Ucapan", price: "untuk harga chat admin", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-8.jpg" },
+        { id: 10, name: "Bouqet 300.000", description: "Free Kartu Ucapan. Bebas request warna bunga dan wrapping", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-9.jpg" },
+        { id: 11, name: "Bouqet 350.000", description: "Free Kartu Ucapan. Bebas request warna bunga dan wrapping", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-10.jpg" },
+        { id: 12, name: "Human size", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-11.jpg" },
+        { id: 13, name: "sunflower", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-12.jpg" },
+        { id: 14, name: "Korean bouqet", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-13.jpg" },
+        { id: 15, name: "colorful", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-14.jpg" },
+        { id: 16, name: "colorful", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-15.jpg" },
+        { id: 17, name: "Butterfly bouqet", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-16.jpg" },
+        { id: 18, name: "Bouqet lily", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-17.jpg" },
+        { id: 19, name: "Keranjang bouqet", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-18.jpg" },
+        { id: 20, name: "Keranjang bouqet", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-19.jpg" },
+        { id: 21, name: "Keranjang bouqet", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-20.jpg" },
+        { id: 22, name: "Keranjang bouqet", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-21.jpg" },
+        { id: 23, name: "Keranjang balon", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-22.jpg" },
+        { id: 24, name: "Keranjang bouqet", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-23.jpg" },
+        { id: 25, name: "Keranjang bouqet", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-24.jpg" },
+        { id: 26, name: "Bloom box ", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-25.jpg" },
+        { id: 27, name: "Bloom box", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-26.jpg" },
+        { id: 28, name: "round bouquet", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-27.jpg" },
+        { id: 29, name: "Round bouqet", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-28.jpg" },
+        { id: 30, name: "Round chocolate", description: "sudah include coklat, untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-29.jpg" },
+        { id: 31, name: "Human size round", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-30.jpg" },
+        { id: 32, name: "Human size round", description: "untuk harga chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-31.jpg" },
+        { id: 33, name: "Price list-money bouqet", description: "harga belum termasuk tambahan bunga", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-32.jpg" },
+        { id: 34, name: "Money bouqet", description: "Tanya Admin, untuk bentuk dan harga", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-33.jpg" },
+        { id: 35, name: "Money bouqet", description: "Tanya Admin, untuk bentuk dan harga", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-34.jpg" },
+        { id: 36, name: "Money bouqet", description: "Tanya Admin, untuk bentuk dan harga", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-35.jpg" },
+        { id: 37, name: "Money bouqet", description: "Tanya Admin, untuk bentuk dan harga", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-36.jpg" },
+        { id: 38, name: "Gift", description: "Chat Admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-37.jpg" },
+        { id: 39, name: "Papan bunga", description: "start harga 250.000-600.000--Free Design", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-38.jpg" },
+        { id: 40, name: "Sewa standing foto", description: "chat admin", price: "", image: "foto-produk/68bff876-e204-4130-b235-073fa09ea63d-39.jpg", category: "regular" },
+        { id: 41, name: "Human Size Bouqet", description: "Bouqet ukuran besar seukuran manusia, untuk harga chat admin", price: "", image: "foto-baru/human-size-bouqet.png" },
+        { id: 42, name: "Human Size Bouqet 2", description: "Bouqet ukuran besar seukuran manusia, untuk harga chat admin", price: "", image: "foto-baru/human-size-bouqet2.png" },
+        { id: 44, name: "Korean Buket", description: "Buket bergaya Korea, untuk harga chat admin", price: "", image: "foto-baru/korean-uket.png" },
+        { id: 45, name: "Lily Bouqet", description: "Bouqet bunga lily, untuk harga chat admin", price: "", image: "foto-baru/lily-bouqet.png" },
+        { id: 47, name: "Round Bouqet Human Size", description: "Bouqet bulat ukuran besar seukuran manusia, untuk harga chat admin", price: "", image: "foto-baru/round-bouqet-human-size.png" },
+        { id: 48, name: "Round Bouqet Human Size 3", description: "Bouqet bulat ukuran besar seukuran manusia, untuk harga chat admin", price: "", image: "foto-baru/round-bouqet-human-size3.png" },
+        { id: 49, name: "Round Buket 50 Tangkai", description: "Bouqet bulat berisi 50 tangkai bunga, untuk harga chat admin", price: "", image: "foto-baru/round-buket-50-tangkai.png" },
+        { id: 50, name: "Thumbelina Buket", description: "Buket Thumbelina mini nan cantik, untuk harga chat admin", price: "", image: "foto-baru/thumbelina-buket.png" }
+        */
 
-      const msgSempidi = `Halo Admin Kyuflorist Sempidi, saya mau order:
-- Produk: *${product.name}*
-- Harga: *${product.price}*
-- Foto Produk: ${photoUrl}
+    ];
 
-Mohon info ketersediaan bunga dan estimasi pengirimannya ya. Terima kasih!`;
+    const catalogDriveUrl = 'https://drive.google.com/drive/folders/1P030nnHp8_pNsiIu0ZyFr5fkYkh6aYjR';
 
-      if (btnDenpasar) {
-        btnDenpasar.href = buildWaUrl(BRANCHES.denpasar.phone, msgDenpasar);
-      }
-      if (btnSempidi) {
-        btnSempidi.href = buildWaUrl(BRANCHES.sempidi.phone, msgSempidi);
-      }
-    } else if (mode === 'contact') {
-      // Contact navbar mode
-      if (prodSummary) prodSummary.style.display = 'none';
-      if (modalHeading) modalHeading.textContent = 'Kontak Cabang Kyuflorist';
-      if (modalSubtitle) {
-        modalSubtitle.textContent = 'Hubungi admin cabang terdekat melalui WhatsApp untuk konsultasi buket atau klik Maps untuk petunjuk arah:';
-      }
-
-      const contactMsgDenpasar = 'Halo Admin Kyuflorist Denpasar, saya ingin konsultasi pemesanan buket bunga & cek pengiriman.';
-      const contactMsgSempidi = 'Halo Admin Kyuflorist Sempidi, saya ingin konsultasi pemesanan buket bunga & cek pengiriman.';
-
-      if (btnDenpasar) {
-        btnDenpasar.href = buildWaUrl(BRANCHES.denpasar.phone, contactMsgDenpasar);
-      }
-      if (btnSempidi) {
-        btnSempidi.href = buildWaUrl(BRANCHES.sempidi.phone, contactMsgSempidi);
-      }
-    } else {
-      // General branch consultation mode
-      if (prodSummary) prodSummary.style.display = 'none';
-      if (modalHeading) modalHeading.textContent = 'Pilih Cabang Kyuflorist';
-      if (modalSubtitle) {
-        modalSubtitle.textContent = 'Hubungi admin cabang terdekat untuk pemesanan buket custom, tanya ketersediaan stok bunga segar, atau pengiriman kilat:';
-      }
-
-      const generalMsgDenpasar = 'Halo Admin Kyuflorist Denpasar, saya ingin tanya ketersediaan stok bunga & pemesanan buket.';
-      const generalMsgSempidi = 'Halo Admin Kyuflorist Sempidi, saya ingin tanya ketersediaan stok bunga & pemesanan buket.';
-
-      if (btnDenpasar) {
-        btnDenpasar.href = buildWaUrl(BRANCHES.denpasar.phone, generalMsgDenpasar);
-      }
-      if (btnSempidi) {
-        btnSempidi.href = buildWaUrl(BRANCHES.sempidi.phone, generalMsgSempidi);
-      }
-    }
-
-    modal.hidden = false;
-    document.body.classList.add('modal-open');
-    if (window.lucide && typeof window.lucide.createIcons === 'function') {
-      window.lucide.createIcons();
-    }
-  };
-
-  /**
-   * Close the Branch Selection Modal
-   */
-  const closeOrderModal = () => {
-    const modal = document.getElementById('branch-order-modal');
-    if (!modal) return;
-    modal.hidden = true;
-    document.body.classList.remove('modal-open');
-  };
-
-  // Expose to global window
-  window.openOrderModal = openOrderModal;
-  window.closeOrderModal = closeOrderModal;
-
-  document.addEventListener('DOMContentLoaded', () => {
-    // 1. Update copyright year
-    const yearEl = document.getElementById('year');
-    if (yearEl) {
-      yearEl.textContent = new Date().getFullYear();
-    }
-
-    // 2. Mobile Header Toggle Menu
-    const menuToggle = document.getElementById('menu-toggle');
+    // --- DOM ELEMENTS ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
+    const productGrid = document.getElementById('product-grid');
+    const productModal = document.getElementById('product-modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const modalPrice = document.getElementById('modal-price');
+    const modalChatPusat = document.getElementById('modal-chat-pusat');
+    const modalChatCabang = document.getElementById('modal-chat-cabang');
 
-    if (menuToggle && mobileMenu) {
-      menuToggle.addEventListener('click', () => {
-        const isHidden = mobileMenu.hidden;
-        mobileMenu.hidden = !isHidden;
-        menuToggle.setAttribute('aria-expanded', String(isHidden));
-        const icon = menuToggle.querySelector('[data-lucide]');
-        if (icon) {
-          icon.setAttribute('data-lucide', isHidden ? 'x' : 'menu');
-          if (window.lucide) window.lucide.createIcons();
+    // --- FUNCTIONS ---
+
+    // Load products into the grid
+    function loadProducts() {
+        try {
+            if (!productGrid) return;
+            let html = '';
+            products.forEach(product => {
+                html += `
+                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg hover:-translate-y-2" data-id="${product.id}">
+                        <div class="h-56 bg-gray-100 flex items-center justify-center p-4 cursor-pointer product-image-container">
+                            <img src="${product.image}" alt="${product.name}" class="h-full w-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-lg mb-2 truncate">${product.name}</h3>
+                            <p class="text-gray-600 text-sm mb-3 h-10 overflow-hidden">untuk harga chat admin</p>
+                            
+                            <button class="buy-now-btn w-full btn-primary py-2.5 rounded-lg text-sm font-semibold flex items-center justify-center gap-2" data-id="${product.id}">
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                                Lihat Katalog
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            productGrid.innerHTML = html;
+            lucide.createIcons();
+        } catch (error) {
+            console.error("Gagal memuat produk:", error);
+            return;
         }
-      });
 
-      // Close mobile menu when any item inside is clicked
-      mobileMenu.querySelectorAll('a, button').forEach(item => {
-        item.addEventListener('click', () => {
-          mobileMenu.hidden = true;
-          menuToggle.setAttribute('aria-expanded', 'false');
-          const icon = menuToggle.querySelector('[data-lucide]');
-          if (icon) {
-            icon.setAttribute('data-lucide', 'menu');
-            if (window.lucide) window.lucide.createIcons();
-          }
+        // Add event listeners
+        document.querySelectorAll('.buy-now-btn').forEach(btn => {
+            btn.addEventListener('click', handleBuyNowClick);
         });
-      });
+        document.querySelectorAll('.product-image-container').forEach(container => {
+            container.addEventListener('click', openProductModal);
+        });
     }
 
-    // 3. Modal event listeners (Backdrop, Close Button, Esc key)
-    const modal = document.getElementById('branch-order-modal');
-    const closeBtn = document.getElementById('modal-close-btn');
-    const backdrop = document.getElementById('modal-backdrop');
+    function createWhatsAppUrl(phoneNumber, productName) {
+        const message = `Halo Kyuflorist, saya tertarik untuk memesan produk: ${productName}`;
+        return `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    }
 
-    if (closeBtn) closeBtn.addEventListener('click', closeOrderModal);
-    if (backdrop) backdrop.addEventListener('click', closeOrderModal);
+    function showProductModal(product) {
+        if (!product || !productModal) return;
+
+        modalImage.src = product.image;
+        modalTitle.textContent = product.name;
+        modalDescription.textContent = product.description;
+        modalPrice.textContent = product.price;
+
+        if (modalChatPusat) {
+            modalChatPusat.href = createWhatsAppUrl('6285847499015', product.name);
+        }
+
+        if (modalChatCabang) {
+            modalChatCabang.href = createWhatsAppUrl('6285785071816', product.name);
+        }
+
+        productModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function redirectToCatalogDrive() {
+        window.location.href = catalogDriveUrl;
+    }
+
+    // Handle buy now button click
+    function handleBuyNowClick(e) {
+        e.stopPropagation();
+        redirectToCatalogDrive();
+    }
+
+    // Open product modal
+    function openProductModal(e) {
+        const card = e.currentTarget.closest('.product-card');
+        const productId = card.dataset.id;
+        const product = products.find(p => p.id == productId);
+
+        showProductModal(product);
+    }
+
+    // Close product modal
+    function closeProductModal() {
+        productModal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        mobileMenu.classList.toggle('max-h-0');
+        mobileMenu.classList.toggle('max-h-[500px]');
+        mobileMenu.classList.toggle('py-4');
+
+        const menuIcon = mobileMenuButton.querySelector('i');
+        if (mobileMenu.classList.contains('max-h-[500px]')) {
+            menuIcon.setAttribute('data-lucide', 'x');
+        } else {
+            menuIcon.setAttribute('data-lucide', 'menu');
+        }
+        lucide.createIcons();
+    }
+
+    // Header scroll effect
+    function handleScroll() {
+        const header = document.getElementById('main-header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+
+    // --- EVENT LISTENERS ---
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+    }
+    window.addEventListener('scroll', handleScroll);
+
+    if (closeModal) {
+        closeModal.addEventListener('click', () => {
+            closeProductModal();
+        });
+    }
+    if (productModal) {
+        productModal.addEventListener('click', (e) => {
+            if (e.target === productModal) {
+                closeProductModal();
+            }
+        });
+    }
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal && !modal.hidden) {
-        closeOrderModal();
-      }
-    });
-
-    // 4. Header WA button triggers modal
-    const headerWaBtn = document.getElementById('header-wa-btn');
-    if (headerWaBtn) {
-      headerWaBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openOrderModal(null, 'branch');
-      });
-    }
-
-    // 5. Bottom Nav Cabang and Kontak Buttons trigger modal
-    const bottomBranchesBtn = document.getElementById('bottom-branches');
-    if (bottomBranchesBtn) {
-      bottomBranchesBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openOrderModal(null, 'branch');
-      });
-    }
-
-    const bottomContactBtn = document.getElementById('bottom-contact');
-    if (bottomContactBtn) {
-      bottomContactBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openOrderModal(null, 'contact');
-      });
-    }
-
-    // 6. Generic triggers for Cabang & Kontak (desktop nav, mobile menu)
-    document.querySelectorAll('[data-trigger="branch"]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openOrderModal(null, 'branch');
-      });
-    });
-
-    document.querySelectorAll('[data-trigger="contact"]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openOrderModal(null, 'contact');
-      });
-    });
-
-    // 7. Global Delegated Click Handler for "Order Sekarang" buttons
-    document.addEventListener('click', (e) => {
-      const orderBtn = e.target.closest('.order-btn, .btn-order-trigger');
-      if (orderBtn) {
-        e.preventDefault();
-        const product = {
-          name: orderBtn.dataset.productName || 'Buket Bunga Kyuflorist',
-          price: orderBtn.dataset.productPrice || '',
-          image: orderBtn.dataset.productImage || '',
-          categoryLabel: orderBtn.dataset.productCategory || 'Buket Pilihan'
-        };
-        openOrderModal(product, 'order');
-      }
-    });
-
-    // 8. Smooth scrolling for internal anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href === '#' || href === '') return;
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
+        if (e.key === 'Escape' && productModal && !productModal.classList.contains('hidden')) {
+            closeProductModal();
         }
-      });
     });
 
-    // 9. Initialize Lucide Icons
-    if (window.lucide && typeof window.lucide.createIcons === 'function') {
-      window.lucide.createIcons();
+    // Close mobile menu when clicking on links
+    if (mobileMenu) {
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('max-h-[500px]')) {
+                    mobileMenu.classList.add('max-h-0');
+                    mobileMenu.classList.remove('max-h-[500px]', 'py-4');
+                    const menuIcon = mobileMenuButton.querySelector('i');
+                    menuIcon.setAttribute('data-lucide', 'menu');
+                    lucide.createIcons();
+                }
+            });
+        });
     }
-  });
-})();
+
+    // --- INITIALIZATION ---
+    loadProducts();
+    handleScroll(); // Initialize header state
+
+    // Intersection Observer for animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-fadeIn');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(section => {
+        observer.observe(section);
+    });
+
+    // --- CATEGORY FILTERING ---
+    let currentCategory = 'all';
+
+    // Load products with filter
+    function loadProductsByCategory(category) {
+        try {
+            if (!productGrid) return;
+            let filteredProducts = products;
+
+            if (category === 'regular') {
+                filteredProducts = products.filter(p => !p.category || p.category === 'regular');
+            }
+
+            let html = '';
+            filteredProducts.forEach(product => {
+                html += `
+                    <div class="product-card bg-white rounded-xl shadow-md overflow-hidden transition-all hover:shadow-lg hover:-translate-y-2" data-id="${product.id}">
+                        <div class="h-56 bg-gray-100 flex items-center justify-center p-4 cursor-pointer product-image-container">
+                            <img src="${product.image}" alt="${product.name}" class="h-full w-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-bold text-lg mb-2 truncate">${product.name}</h3>
+                            <p class="text-gray-600 text-sm mb-3 h-10 overflow-hidden">untuk harga chat admin</p>
+                            
+                            <button class="buy-now-btn w-full btn-primary py-2.5 rounded-lg text-sm font-semibold flex items-center justify-center gap-2" data-id="${product.id}">
+                                <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                                Chat Admin 
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            productGrid.innerHTML = html;
+            lucide.createIcons();
+
+            // Re-add event listeners
+            document.querySelectorAll('.buy-now-btn').forEach(btn => {
+                btn.addEventListener('click', handleBuyNowClick);
+            });
+            document.querySelectorAll('.product-image-container').forEach(container => {
+                container.addEventListener('click', openProductModal);
+            });
+        } catch (error) {
+            console.error("Gagal memuat produk:", error);
+        }
+    }
+
+    // Handle category button clicks
+    document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const category = this.dataset.category;
+
+            // Update active state
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            // Filter products
+            currentCategory = category;
+            loadProductsByCategory(category);
+        });
+    });
+});
+
